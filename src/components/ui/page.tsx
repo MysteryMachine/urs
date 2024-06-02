@@ -10,7 +10,7 @@ export interface GenericProps {
 export type PageComponent = React.FC<GenericProps >;
 
 export const Accent: PageComponent = ({ children, href }) => {
-  const C = href
+  const AccentContainer = href
     ? ({ children, className }: GenericProps): React.ReactNode => (
         <a className={className} href={href}>
           {children}
@@ -19,7 +19,11 @@ export const Accent: PageComponent = ({ children, href }) => {
     : ({ children, className }: GenericProps): React.ReactNode => (
         <span className={className}> {children} </span>
       );
-  return <C className={'text-red-500 font-bold'}>{children}</C>;
+  return (
+    <AccentContainer className={'text-red-500 font-bold'}>
+      {children}
+    </AccentContainer>
+  );
 };
 
 export const I: PageComponent = ({ children }) => {
