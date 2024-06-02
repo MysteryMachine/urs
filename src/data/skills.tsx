@@ -1,9 +1,24 @@
-interface Skill {
+import { STAT } from './stats';
 
+export interface Bonus {
+  tags?: string[];
+  stats?: STAT[];
+  bonusDamage?: number;
+  bonusRoll?: number;
 }
 
-export const BROWSE_MAGIC_SHOP_ID = 1
-const BROWSE_MAGIC_SHOP: Skill = {}
+export const TAGS = {
+  MELEE: 'Melee',
+  COMBAT: 'Combat',
+};
 
-export const skills: Skill[] = []
-skills[BROWSE_MAGIC_SHOP_ID] = BROWSE_MAGIC_SHOP
+interface Skill {}
+
+export const SKILLS: Skill[] = [];
+
+export const BROWSE_MAGIC_SHOP_ID = 0;
+export const VERIFY_TEXTBOOK_ID = 0;
+export const SCRY_ID = 0;
+export const SUMMON_LESSER_FAMILIAR_ID = 0;
+export const CONTEMPLATE_ASTROLABE_ID = 0;
+export const SOLVE_PUZZLEBOX_ID = 0;
