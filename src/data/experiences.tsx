@@ -23,7 +23,7 @@ export interface RequirementBase {
 export interface ItemRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.ITEM;
   amount: number;
-  id: number | undefined;
+  id: number;
 }
 
 export interface StatRequirement extends RequirementBase {
@@ -34,7 +34,7 @@ export interface StatRequirement extends RequirementBase {
 
 export interface SkillRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.SKILL;
-  id: number | undefined;
+  id: number;
 }
 
 export interface OtherRequirement extends RequirementBase {
@@ -657,7 +657,7 @@ export const EXPERIENCES: Experience[] = [
       {
         type: REWARD_TYPE.Other,
         description: 'a Warrior’s Guild is added to the settlement'
-      }
+      },
       {
         type: CHOICE_REWARD_TYPE.OR,
         reward: [

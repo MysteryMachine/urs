@@ -6,8 +6,9 @@ export interface GenericProps {
   id?: string;
   href?: string;
   children: React.ReactNode;
+  full?: boolean;
 }
-export type PageComponent = React.FC<GenericProps >;
+export type PageComponent = React.FC<GenericProps>;
 
 export const Accent: PageComponent = ({ children, href }) => {
   return href ? (
@@ -20,8 +21,8 @@ export const Accent: PageComponent = ({ children, href }) => {
 };
 
 export const I: PageComponent = ({ children }) => {
-  return <span className='italic'>{children}</span>
-}
+  return <span className="italic">{children}</span>;
+};
 
 export const B: PageComponent = ({ children }) => {
   return <span className="font-extrabold">{children}</span>;
@@ -30,7 +31,10 @@ export const B: PageComponent = ({ children }) => {
 export const H1: PageComponent = ({ children, id, href }) => {
   return (
     <a href={href}>
-      <h1 id={id} className="text-red-500 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 mt-12">
+      <h1
+        id={id}
+        className="text-red-500 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 mt-12"
+      >
         {children}
       </h1>
     </a>
@@ -92,20 +96,34 @@ export const PTight: PageComponent = ({ className, children }) => {
   );
 };
 
-export const Ul: PageComponent = ({ children, className }) => {
-  return <ul className={`list-disc leading-6 ml-6 w-3/4 ${className}`}> {children} </ul>;
+export const Ul: PageComponent = ({ children, className, full }) => {
+  return (
+    <ul
+      className={`list-disc leading-6 ml-6 ${full ? 'w-1/1' : 'w-3/4'} ${className}`}
+    >
+      {' '}
+      {children}{' '}
+    </ul>
+  );
 };
 
-export const UlItalic: PageComponent = ({ children, className }) => {
+export const UlItalic: PageComponent = ({ children, className, full }) => {
   return (
-    <ul className={`ml-6 leading-6  w-3/4 italic ${className}`}>
+    <ul
+      className={`ml-6 leading-6  ${full ? 'w-1/1' : 'w-3/4'} italic ${className}`}
+    >
       {children}
     </ul>
   );
 };
 
-export const UlDotless: PageComponent = ({ children, className }) => {
-  return <ul className={`ml-6 leading-6  w-5/6 ${className}`}> {children} </ul>;
+export const UlDotless: PageComponent = ({ children, className, full }) => {
+  return (
+    <ul className={`ml-6 leading-6  ${full ? 'w-1/1' : 'w-5/6'} ${className}`}>
+      {' '}
+      {children}{' '}
+    </ul>
+  );
 };
 
 export const Li: PageComponent = ({ children }) => {
@@ -113,14 +131,15 @@ export const Li: PageComponent = ({ children }) => {
 };
 
 export const Indent: PageComponent = ({ children }) => {
-  return <div className={'ml-6'}>{children}</div>
-}
+  return <div className={'ml-6'}>{children}</div>;
+};
 
 export const SimpleListItem = (s: string) => {
-  const [item, description] = s.split(':')
+  const [item, description] = s.split(':');
   return (
     <Li>
-      <Accent>{item}</Accent>{description}
+      <Accent>{item}</Accent>
+      {description}
     </Li>
-  )
-}
+  );
+};

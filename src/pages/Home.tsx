@@ -35,7 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { BROWSE_MAGIC_SHOP_ID } from '@/data/skills';
+import * as Skills from '@/data/skills';
 import { useState } from 'react';
 
 const Us = [
@@ -1142,7 +1142,7 @@ export default function Dashboard() {
       <UlDotless>
         <Li>
           <Accent>Magic Shop: </Accent> When the party shops here, they may
-          <Accent href={`/skills/${BROWSE_MAGIC_SHOP_ID}`}>
+          <Accent href={`/skills/${Skills.BROWSE_MAGIC_SHOP_SKILL_ID}`}>
             {' '}
             Browse the Magic Shop{' '}
           </Accent>

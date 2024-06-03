@@ -32,16 +32,17 @@ export const TAGS = {
   SUPERNATURAL: 'Supernatural',
 };
 
-type Roll = [STAT] | [STAT, STAT] | ANY | NONE;
+export type Roll = [STAT] | [STAT, STAT] | ANY | NONE;
 
 export interface Skill {
   name: string;
   description: string;
   tags?: string[];
   options?: string[];
-  tenPlus?: string;
-  sixToNine?: string;
-  otherwise?: string;
+  successOptions?: string[];
+  fullSuccess?: string;
+  success?: string;
+  failure?: string;
   additionalInfo?: string;
   roll?: Roll;
   optionalRoll?: Roll;
@@ -59,10 +60,10 @@ export const SKILLS: Skill[] = [
       'When attacking something violently and carelessly in melee range',
     roll: [STAT.STRENGTH],
     tags: [TAGS.MELEE, TAGS.WEAPON, TAGS.COMBAT, TAGS.REACTION],
-    tenPlus:
+    fullSuccess:
       'Roll your weapon damage. Optionally, roll your damage a second time in return for suffering a consequence.',
-    sixToNine: 'Roll your damage but suffer a consequence.',
-    otherwise: 'Suffer a consequence.',
+    success: 'Roll your damage but suffer a consequence.',
+    failure: 'Suffer a consequence.',
     additionalInfo:
       'You can declare a Brawl on your turn, or in reaction to an enemy melee attack on yourself.',
   },
@@ -76,9 +77,9 @@ export const SKILLS: Skill[] = [
       'Deal 1d4 damage.',
       'When an ally attempts to Combat the enemy, you roll Wrestle again. If you succeed, your ally succeeds automatically. If you fail, your ally rolls as normal. Your hold continues regardless of the result.',
     ],
-    tenPlus: 'Select 2 from the list above.',
-    sixToNine: 'Select 1 from the list above.',
-    otherwise: 'They break free from your hold. Suffer a consequence.',
+    fullSuccess: 'Select 2 from the list below.',
+    success: 'Select 1 from the list above.',
+    failure: 'They break free from your hold. Suffer a consequence.',
     additionalInfo:
       'You are unable to take non-Wrestle Combat skills without letting your hold go. You can declare a Wrestle on your turn, or in reaction to an enemy melee attack on yourself.',
   },
@@ -87,15 +88,15 @@ export const SKILLS: Skill[] = [
     description: 'When attacking an enemy at range',
     roll: [STAT.STRENGTH, STAT.DEXTERITY],
     tags: [TAGS.SHORT_RANGE, TAGS.WEAPON, TAGS.COMBAT],
-    options: [
+    successOptions: [
       'Use 1 extra ammunition to land the shot.',
       'Expose yourself to danger to find the shot.',
       'Isolate yourself to find the shot.',
     ],
-    tenPlus: 'Roll your weapon damage.',
-    sixToNine:
-      'Roll your damage but suffer a consequence from the list above. The Storyteller may add or remove options from the list.',
-    otherwise: 'You miss. Suffer a consequence.',
+    fullSuccess: 'Roll your weapon damage.',
+    success:
+      'Roll your damage but suffer a consequence from the list below. The Storyteller may add or remove options from the list.',
+    failure: 'You miss. Suffer a consequence.',
   },
   {
     name: 'Duel',
@@ -103,9 +104,9 @@ export const SKILLS: Skill[] = [
       'When you fight someone carefully in melee range, guarding yourself against retaliation',
     roll: [STAT.DEXTERITY],
     tags: [TAGS.MELEE, TAGS.WEAPON, TAGS.COMBAT, TAGS.REACTION],
-    tenPlus: 'Roll your weapon damage.',
-    sixToNine: 'Neither side manages to land a blow.',
-    otherwise: 'Suffer a consequence.',
+    fullSuccess: 'Roll your weapon damage.',
+    success: 'Neither side manages to land a blow.',
+    failure: 'Suffer a consequence.',
     additionalInfo:
       'You can declare a Duel on your turn, or in reaction to an enemy melee attack on yourself.',
   },
@@ -121,9 +122,9 @@ export const SKILLS: Skill[] = [
       'You maneuver the creature to somewhere advantageous',
       'Your character remains hidden to the creature',
     ],
-    tenPlus: 'Select 2 from the list above.',
-    sixToNine: 'Select 1 from the list above.',
-    otherwise:
+    fullSuccess: 'Select 2 from the list below.',
+    success: 'Select 1 from the list above.',
+    failure:
       'Your attack misses, your character is now revealed to that creature.',
   },
   {
@@ -138,9 +139,9 @@ export const SKILLS: Skill[] = [
       'You maneuver the creature to somewhere advantageous',
       'Your character remains hidden to the creature',
     ],
-    tenPlus: 'Select 2 from the list above.',
-    sixToNine: 'Select 1 from the list above.',
-    otherwise:
+    fullSuccess: 'Select 2 from the list below.',
+    success: 'Select 1 from the list above.',
+    failure:
       'Your attack misses, your character is now revealed to that creature.',
   },
   {
@@ -156,11 +157,11 @@ export const SKILLS: Skill[] = [
       'You find a well guarded location that, when attacked with a Stealth, deals x die of y damage',
       'You identify a blind spot that, when taken advantage of, adds +1 Advantage to Stealth skills',
     ],
-    tenPlus:
+    fullSuccess:
       'You identify the enemy’s weak points. Upon telling your allies of the weakness, they gain +1 bonus on their own Analyze for Weaknesses rolls. Select from the options below, the storyteller may add or remove options.',
-    sixToNine:
+    success:
       'You cannot identify a weak point. When trying to find a weak point on this target next turn, gain +1 advantage.',
-    otherwise:
+    failure:
       'You cannot identify a weak point. When trying to find a weak point on this target next turn, gain +1 disadvantage.',
     additionalInfo:
       'To take advantage of the weakness, the attacking player must have succeeded the Analyze for Weaknesses roll. For example, a player may have realized the giant frog’s liver is relatively external compared to its organs, and should be targeted. This gives their barbarian friend +1 bonus on their own Analyze for Weaknesses, but the barbarian still needs to be smart enough to figure out where the liver is on a frog.',
@@ -176,10 +177,10 @@ export const SKILLS: Skill[] = [
       'Your next instance of damage dealt by a combat roll deals 1d4 extra damage',
       'Your next Find Opening skill has advantage',
     ],
-    tenPlus:
-      'Select 2 from the list above. The Storyteller may add or remove options.',
-    sixToNine: 'Select 1 from the list above.',
-    otherwise:
+    fullSuccess:
+      'Select 2 from the list below. The Storyteller may add or remove options.',
+    success: 'Select 1 from the list below.',
+    failure:
       'You cannot find an opening. You cannot use Find Opening next turn.',
   },
   {
@@ -188,10 +189,19 @@ export const SKILLS: Skill[] = [
     description:
       'When you survey your surroundings looking for something to gain an advantage during a moment of duress',
     tags: [TAGS.BONUS, TAGS.PERCEIVE, TAGS.ANALYZE],
-    tenPlus:
+    options: ['You find high ground, giving your ranged attacks +1 bonus',
+      'You find cover, giving you advantage on defending against ranged attacks',
+      'You find a good place to hide, putting you in stealth',
+    "You find some sort of item you can use to your advantage"],
+    successOptions: [
+      "You must expend an item to get to the advantage",
+      "You can only get to the advantage on your next turn",
+      "Getting to the advantage is risky"
+    ],
+    fullSuccess:
       'You find something useful from the list below. The Storyteller will tell you what. You gain a +1 bonus on your next roll utilizing the useful thing you found.',
-    sixToNine: 'You find something, but there’s a catch.',
-    otherwise: 'You find nothing of value.',
+    success: 'You find something, but there’s a catch.',
+    failure: 'You find nothing of value.',
   },
   {
     name: 'Goad',
@@ -203,11 +213,10 @@ export const SKILLS: Skill[] = [
       'The enemy backs off for 1+Cha turns, minimum 1.',
       'The enemy is distracted, and all Melee Combat rolls against them until your next turn gain +1 bonus',
     ],
-    tenPlus:
-      'Select 1 from the list above. The Storyteller may add or remove options.',
-    sixToNine:
-      'You annoy the enemy, and if they can only attack you this turn.',
-    otherwise: 'The enemy ignores your goading.',
+    fullSuccess:
+      'Select 1 from the list below. The Storyteller may add or remove options.',
+    success: 'You annoy the enemy, and if they can only attack you this turn.',
+    failure: 'The enemy ignores your goading.',
     additionalInfo:
       'You can declare a Goad on your turn, or in reaction to an enemy melee attack on yourself or an ally. You can only Goad once per turn.',
   },
@@ -216,10 +225,10 @@ export const SKILLS: Skill[] = [
     description: 'When you call a shot in battle, or dictate a stratagem',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.BONUS, TAGS.VERBAL],
-    tenPlus:
+    fullSuccess:
       'Gain 3 Stratagem. When an allied player follows through on your plan, you can spend 1 Stratagem to give them a +1 bonus on any roll.',
-    sixToNine: 'Gain 1 Stratagem.',
-    otherwise:
+    success: 'Gain 1 Stratagem.',
+    failure:
       'You do not succeed in persuading your allies to follow your plans.',
   },
   {
@@ -228,11 +237,11 @@ export const SKILLS: Skill[] = [
       'When attempting to convince someone to do something using a logical appeal',
     roll: [STAT.CHARISMA, STAT.INTELLIGENCE],
     tags: [TAGS.PERSUASION],
-    tenPlus:
+    fullSuccess:
       'Your attempt to persuade the person succeeds and the Persuasion Event resolves.',
-    sixToNine:
+    success:
       'Your persuasion attempt fails, however, you have set doubts in the person’s mind. You and your allies cannot attempt to use the same fact or argument to change this person’s mind unless the Difficulty Modifier is reduced again. Reduce the Difficulty Modifier of the Persuasion Event by 1.',
-    otherwise:
+    failure:
       'Your attempt is not persuasive. You and your allies cannot attempt to use the same fact or argument to change this person’s mind unless the Difficulty Modifier is reduced by another skill.',
   },
   {
@@ -241,11 +250,11 @@ export const SKILLS: Skill[] = [
       'When attempting to intimidate someone who could be intimidated to do something',
     roll: [STAT.CHARISMA, STAT.STRENGTH],
     tags: [TAGS.PERSUASION],
-    tenPlus:
+    fullSuccess:
       'Your attempt to intimidate the person succeeds and the Persuasion Event resolves.',
-    sixToNine:
+    success:
       'Your intimidation attempt fails, however, you have shaken the person. You and your allies cannot attempt to Intimidate this person again unless the Difficulty Modifier is reduced by another skill. Reduce the Difficulty Modifier of the Persuasion Event by 1.',
-    otherwise:
+    failure:
       'Your intimidation attempt is not well received. Increase the Difficulty Modifier of the Persuasion Event by 2. Suffer a consequence.',
   },
   {
@@ -253,11 +262,16 @@ export const SKILLS: Skill[] = [
     description: 'When attempting to bribe someone',
     roll: [STAT.CHARISMA, STAT.WILLPOWER],
     tags: [TAGS.PERSUASION],
-    tenPlus:
+    successOptions: [
+      'Give the greater bribe, reduce the Difficulty Modifier of the Persuasion Event by 1.',
+      'Give a lesser bribe, and do not reduce the Difficulty Modifier.',
+      'Your party cannot attempt to Bribe again for this Persuasion Event.',
+    ],
+    fullSuccess:
       'If that person would accept a bribe, a smaller trinket or a smaller quantity of coin will suffice as a bribe. Reduce the Difficulty Modifier of the Persuasion Event by 1. Alternatively, the player can accept giving a greater bribe, at which point, the Persuasion Event resolves.',
-    sixToNine:
-      'If that person would accept a bribe, the person is amenable to a bribe, but it would require a bigger trinket or quantity of coin to convince them. Pick one of the three options below: Give the greater bribe, reduce the Difficulty Modifier of the Persuasion Event by 1. Give a lesser bribe, and do not reduce the Difficulty Modifier. Your party cannot attempt to Bribe again for this Persuasion Event.',
-    otherwise:
+    success:
+      'If that person would accept a bribe, the person is amenable to a bribe, but it would require a bigger trinket or quantity of coin to convince them. Pick one of the three options below.',
+    failure:
       'Your bribe is not well received. Increase the Difficulty Modifier of the Persuasion Event by 1. Your party cannot attempt to Bribe again for this Persuasion Event.',
     additionalInfo:
       'The value of a bribe is determined by the Storyteller, though some standard bribes are listed in the Unspecialized Services section. Greater bribes might include doing favors or going on quests for someone.',
@@ -268,11 +282,11 @@ export const SKILLS: Skill[] = [
       'When attempting to befriend or seduce someone in order to convince them of something',
     roll: [STAT.CHARISMA],
     tags: [TAGS.PERSUASION],
-    tenPlus:
+    fullSuccess:
       'Your attempt to charm the person succeeds, reduce the Difficulty Modifier of the Persuasion Event by 1.',
-    sixToNine:
+    success:
       'Your attempt to charm the person succeeds, but any more might be too much, reduce the Difficulty Modifier of the Persuasion Event by 1. You have +1 Disadvantage on any other Charm attempts for this Persuasion Event.',
-    otherwise:
+    failure:
       'Your attempt to Charm the person fails. You have +1 Disadvantage on any other Charm attempts for this Persuasion Event.',
   },
   {
@@ -288,11 +302,11 @@ export const SKILLS: Skill[] = [
       'What is this person’s disposition towards this belief?',
       'Is there something this person has said that does not seem entirely truthful? This question may be asked again if the player has more questions they can ask.',
     ],
-    tenPlus:
+    fullSuccess:
       'Ask 2 of the following questions to the Storyteller. You may Read Person again after using a Persuasion action.',
-    sixToNine:
+    success:
       'Ask 1 question above. You may Read Person again after using a Persuasion action.',
-    otherwise:
+    failure:
       'You do not notice anything. You cannot use Read Person again until the Difficulty Modifier of this Persuasion Event is reduced.',
   },
   {
@@ -300,11 +314,11 @@ export const SKILLS: Skill[] = [
     description: 'When you attempt to use your leverage over a person',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.PERSUASION],
-    tenPlus:
+    fullSuccess:
       'Your attempt to use your leverage the person succeeds and the Persuasion Event resolves.',
-    sixToNine:
+    success:
       'Reduce the Difficulty Modifier by 1. You and your party cannot Use Leverage with this specific piece of leverage again during this Persuasion Event.',
-    otherwise:
+    failure:
       'You and your party cannot Use Leverage with this specific piece of leverage again during this Persuasion Event. Increase the Difficulty Modifier of this Persuasion Event by 2.',
     additionalInfo:
       'Having leverage means some sort of thing that might compel the person to make a difficult choice, like having authority over them, having a hostage, or being in control of a situation they might not want to come to pass.',
@@ -319,9 +333,9 @@ export const SKILLS: Skill[] = [
       'You automatically succeed on Travel rolls as if you rolled a 10+ for the next three days.',
       'You find a shortcut, and manage to travel 4 days worth of traveling in 3.',
     ],
-    tenPlus: 'Select two of the options below.',
-    sixToNine: 'Pick one of the options above.',
-    otherwise: 'Suffer a consequence.',
+    fullSuccess: 'Select two of the options below.',
+    success: 'Pick one of the options above.',
+    failure: 'Suffer a consequence.',
   },
   {
     name: 'Search for Traps',
@@ -329,11 +343,11 @@ export const SKILLS: Skill[] = [
       'Your experience dungeoneering has taught you about the different kinds of traps that exist in the world, and how to identify them. When attempting to search for traps,',
     roll: [STAT.WILLPOWER, STAT.INTELLIGENCE],
     tags: [TAGS.CAMPAIGN],
-    tenPlus:
+    fullSuccess:
       'If there are traps, you find one. You can search for traps again. If you do so, roll with advantage.',
-    sixToNine:
+    success:
       'If there are traps, you find one. You can search for traps again.',
-    otherwise: 'You do not find a trap. You cannot roll to search again.',
+    failure: 'You do not find a trap. You cannot roll to search again.',
   },
   {
     name: 'Set Trap',
@@ -354,9 +368,9 @@ export const SKILLS: Skill[] = [
       'Your knowledge of basic mechanics has granted you a knack for disarming dangerous traps when traveling. When attempting to disarm a trap with a Lockpicking Kit',
     roll: [STAT.DEXTERITY, STAT.INTELLIGENCE],
     tags: [TAGS.CAMPAIGN],
-    tenPlus: 'You succeed.',
-    sixToNine: 'You succeed, but suffer a consequence.',
-    otherwise: 'You suffer a consequence.',
+    fullSuccess: 'You succeed.',
+    success: 'You succeed, but suffer a consequence.',
+    failure: 'You suffer a consequence.',
   },
   {
     name: 'Bless',
@@ -364,11 +378,11 @@ export const SKILLS: Skill[] = [
       'Your religious studies have given you a rudimentary ability to bless individuals with your deity’s favor. Once per day, when consecrating a person with the rites of your deity',
     roll: [STAT.WILLPOWER],
     tags: [TAGS.RELIGIOUS],
-    tenPlus:
+    fullSuccess:
       'They gain a Blessing token, which they can spend to roll any skill with advantage. You may grant your deity’s blessing again today to a different person.',
-    sixToNine:
+    success:
       'They gain a Blessing token, which they can spend to roll any skill with advantage. You may NOT grant your deity’s blessing again today.',
-    otherwise:
+    failure:
       'Nothing happens. You may NOT grant your deity’s blessing again today.',
   },
   {
@@ -377,10 +391,10 @@ export const SKILLS: Skill[] = [
       'Your time working as a tradesperson has given you a knack for haggling. When making a purchase of one or more items of a cost of more than 10 coins',
     roll: [STAT.CHARISMA],
     tags: [TAGS.PERSUASION],
-    tenPlus: 'Gain a 1d4+Cha discount.',
-    sixToNine:
+    fullSuccess: 'Gain a 1d4+Cha discount.',
+    success:
       'The merchant is willing to give you a 1d4+Cha discount if you buy 5 coins more worth of goods. You cannot Haggle again today.',
-    otherwise:
+    failure:
       'The merchant is not willing to budge. You cannot Haggle again today.',
   },
   {
@@ -389,10 +403,10 @@ export const SKILLS: Skill[] = [
       'Your time studying has given you a broad sense of the world, and knowledge of many of its facets. When consulting ones learned experiences for relevant facts',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.SCHOLARLY],
-    tenPlus: 'You know something interesting, and directly useful.',
-    sixToNine:
+    fullSuccess: 'You know something interesting, and directly useful.',
+    success:
       "You know a related fact, but it's up to the players on how to make it useful.",
-    otherwise: 'You don’t know anything about this subject.',
+    failure: 'You don’t know anything about this subject.',
   },
   {
     name: 'Seductive',
@@ -425,11 +439,11 @@ export const SKILLS: Skill[] = [
       'You are able to infiltrate quickly.',
       'You expend no resources in your infiltration.',
     ],
-    tenPlus:
+    fullSuccess:
       'You successfully arrive at your destination. Choose two from the list below.',
-    sixToNine:
+    success:
       'You successfully arrive at your destination. Choose one from the list above.',
-    otherwise: 'You fail. Suffer a consequence.',
+    failure: 'You fail. Suffer a consequence.',
   },
   {
     name: 'Take Aim',
@@ -442,9 +456,9 @@ export const SKILLS: Skill[] = [
       'You remove a piece of armor on the creature, reducing its armor by 1.',
       'Your character remains hidden to the creature.',
     ],
-    tenPlus: 'Select 2 from the list below.',
-    sixToNine: 'Select 1 from the list above.',
-    otherwise:
+    fullSuccess: 'Select 2 from the list below.',
+    success: 'Select 1 from the list above.',
+    failure:
       'Your attack misses, your character is now revealed to that creature.',
   },
   {
@@ -458,20 +472,21 @@ export const SKILLS: Skill[] = [
       'The subject provides you with the information immediately.',
       'The subject provides you exactly what you were looking for.',
     ],
-    tenPlus: 'The subject gives in to your demands. Select three from below.',
-    sixToNine: 'Select one from above.',
-    otherwise: 'The subject expires from your torture.',
+    fullSuccess:
+      'The subject gives in to your demands. Select three from below.',
+    success: 'Select one from above.',
+    failure: 'The subject expires from your torture.',
   },
   {
     name: 'Endure',
     description: 'When taking damage that would take you below 1 hit point',
     roll: [STAT.WILLPOWER, STAT.CONSTITUTION],
     tags: [TAGS.COMBAT],
-    tenPlus:
+    fullSuccess:
       'You endure the hit, and are reduced to 1 hit point instead. You are knocked out for the remainder of the combat encounter.',
-    sixToNine:
+    success:
       'You endure the hit, and are reduced to 1 hit point instead. Suffer an injury. You are knocked out for the remainder of the combat encounter.',
-    otherwise: 'You fail to endure the hit.',
+    failure: 'You fail to endure the hit.',
   },
   {
     name: 'Willful',
@@ -491,9 +506,9 @@ export const SKILLS: Skill[] = [
       'When you have 30 minutes to quietly suture an injury suffered as the result of a cut to the flesh, as well as some needle and thread',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.MEDICAL],
-    tenPlus: 'Remove the injury immediately.',
-    sixToNine: 'Remove the injury, inflict 1d6 damage on the player.',
-    otherwise:
+    fullSuccess: 'Remove the injury immediately.',
+    success: 'Remove the injury, inflict 1d6 damage on the player.',
+    failure:
       'The injury is beyond your abilities, you are not able to try to Suture it again.',
   },
   {
@@ -522,11 +537,11 @@ export const SKILLS: Skill[] = [
       'You are able to track your target quickly.',
       'You expend no resources while tracking your target.',
     ],
-    tenPlus:
+    fullSuccess:
       'You are able to track the target to their destination. Select two options from the list below.',
-    sixToNine:
+    success:
       'You are able to track the target to their destination. Select one option from the list above.',
-    otherwise: 'You are unable to track your target.',
+    failure: 'You are unable to track your target.',
   },
   {
     name: 'Prowl',
@@ -539,20 +554,20 @@ export const SKILLS: Skill[] = [
       'Other creatures in the area do not notice you.',
       'You expend no resources in your advance towards your target.',
     ],
-    tenPlus:
+    fullSuccess:
       'You successfully prowl close enough to the target to strike. Choose two options from the list below.',
-    sixToNine: 'Choose one option from the list above.',
-    otherwise: 'You fail. Suffer a consequence.',
+    success: 'Choose one option from the list above.',
+    failure: 'You fail. Suffer a consequence.',
   },
   {
     name: 'Pickpocket',
     description: 'When attempting to steal a small item from someone',
     roll: [STAT.DEXTERITY],
     tags: [TAGS.CRIMINAL],
-    tenPlus:
+    fullSuccess:
       'You are able to steal the item without drawing attention to yourself.',
-    sixToNine: 'You are able to steal the item, however, suffer a consequence.',
-    otherwise: 'You are unable to steal the item. Suffer a consequence.',
+    success: 'You are able to steal the item, however, suffer a consequence.',
+    failure: 'You are unable to steal the item. Suffer a consequence.',
   },
   {
     name: 'Lockpick',
@@ -565,9 +580,9 @@ export const SKILLS: Skill[] = [
       'You do not draw any attention to yourself.',
       'You are able to pick the lock quickly.',
     ],
-    tenPlus: 'You open the door. Select 2 of the options below.',
-    sixToNine: 'You open the door. Pick one option from above.',
-    otherwise: 'The lock is beyond your abilities.',
+    fullSuccess: 'You open the door. Select 2 of the options below.',
+    success: 'You open the door. Pick one option from above.',
+    failure: 'The lock is beyond your abilities.',
   },
   {
     name: 'Cite Sources',
@@ -605,11 +620,11 @@ export const SKILLS: Skill[] = [
       'Your time on the battlefield has taught you the value of instilling fear in your enemies. When letting out an intimidating bellow',
     roll: [STAT.CONSTITUTION],
     tags: [TAGS.BONUS],
-    tenPlus:
+    fullSuccess:
       'Your enemies are intimidated by your bellow. Reduce the damage dealt by enemy melee attacks on allies by 2*Con times this turn, with a max of Con reduced for a single instance of damage.',
-    sixToNine:
+    success:
       'Your enemies are intimidated by your bellow. Reduce the damage dealt by enemy melee attacks on allies by Con times this turn.',
-    otherwise: 'You’re unable to intimidate your enemies.',
+    failure: 'You’re unable to intimidate your enemies.',
   },
   {
     name: 'Riposte',
@@ -629,11 +644,11 @@ export const SKILLS: Skill[] = [
       'Your supernatural dealings have given you strange new ways to see into the Great Beyond. After using Seance, you have Disadvantage on all Seance rolls for the rest of the day. When taking the time to perform a seance, using a Crystal ball',
     roll: [STAT.CHARISMA, STAT.WILLPOWER],
     tags: [TAGS.SUPERNATURAL],
-    tenPlus:
+    fullSuccess:
       'The spirits speak to you. Name a spirit, and if it wishes to speak to you, it will come. Otherwise, a helpful spirit will step forth instead. You may ask this spirit three questions, and it will answer each question with one sentence.',
-    sixToNine:
+    success:
       'A helpful spirit steps forth to answer a single question. It will answer with one sentence.',
-    otherwise: 'No spirits step forth.',
+    failure: 'No spirits step forth.',
   },
   {
     name: 'Simple Psychokinesis',
@@ -652,22 +667,22 @@ export const SKILLS: Skill[] = [
     description: 'When you want to sell a hot item to the criminal underbelly',
     roll: [STAT.CHARISMA, STAT.WILLPOWER],
     tags: [TAGS.CRIMINAL],
-    tenPlus:
+    fullSuccess:
       'A buyer in this settlement is willing to buy it off of you for market value.',
-    sixToNine:
+    success:
       'A buyer in this settlement is willing to buy it off of you for half its market value.',
-    otherwise: 'The buyer turned out to be a guard. Suffer a consequence.',
+    failure: 'The buyer turned out to be a guard. Suffer a consequence.',
   },
   {
     name: 'Verify Textbook',
     description: 'Before using a textbook, if the Storyteller requires it',
     roll: NONE,
     tags: [TAGS.PASSIVE],
-    tenPlus:
+    fullSuccess:
       'The textbook has accurate information. From now on, if you have time to consult the textbook, ask the DM a question about the textbook’s subject. They must answer truthfully. The more specific the subject declared, the more detailed the information must be.',
-    sixToNine:
+    success:
       'The textbook contains unclear, out of date, inaccurate, or muddled information. If you have time to consult the textbook, ask the DM a question about the textbook’s subject. They will give you information that can be unclear, subtly incorrect, or even exactly right.',
-    otherwise: 'The textbook is clearly useless.',
+    failure: 'The textbook is clearly useless.',
   },
   {
     name: 'Inhuman',
@@ -681,11 +696,11 @@ export const SKILLS: Skill[] = [
       'You are able to gaze into the orb, across space to find an object or a person of your choice. When doing so',
     roll: [STAT.WILLPOWER],
     tags: [TAGS.SUPERNATURAL],
-    tenPlus:
+    fullSuccess:
       'You find what you are looking for, and have a clear picture of precisely where it is. The orb grows dull for the next week, rendering you unable to use it in that time.',
-    sixToNine:
+    success:
       'You find what you are looking for, but it is not clear where exactly it might be. The orb grows dull for the next month, rendering you unable to use it in that time.',
-    otherwise:
+    failure:
       'You are unable to find what you are looking for. The orb grows dull for the next month, rendering you unable to use it in that time.',
   },
   {
@@ -700,10 +715,10 @@ export const SKILLS: Skill[] = [
       'Put 4 Puzzle tokens on the Puzzlebox. When spending the evening trying to solve the puzzle, when it is not inert',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.SUPERNATURAL],
-    tenPlus: 'Remove one token from the box.',
-    sixToNine:
+    fullSuccess: 'Remove one token from the box.',
+    success:
       'Remove one token from the box. The puzzlebox remains inert for the next week.',
-    otherwise:
+    failure:
       'You are unable to make progress on the puzzle. The puzzlebox remains inert for the next week.',
     additionalInfo:
       'Upon removing the final token, be forced to take the Angels to Some experience next Rest & Reflect the party takes. Remove the puzzlebox from your inventory.',
@@ -714,10 +729,10 @@ export const SKILLS: Skill[] = [
       'Put 4 Astral tokens on the Astrolabe. When pondering the inscriptions of the Astrolabe at night, while being surrounded by sea,',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.SUPERNATURAL],
-    tenPlus: 'Remove one token from the astrolabe.',
-    sixToNine:
+    fullSuccess: 'Remove one token from the astrolabe.',
+    success:
       'Remove one token from the astrolabe. The astrolabe remains inert for the next week.',
-    otherwise:
+    failure:
       'You are unable to make progress on the astrolabe. The astrolabe remains inert for the next week.',
     additionalInfo:
       'Upon removing the final token, be forced to take the Hypertyphoon experience next Rest & Reflect the party takes.',
@@ -728,11 +743,11 @@ export const SKILLS: Skill[] = [
       'To conduct the Ravenmorph ritual, you must first draw a magic circle in a feathered creature’s blood, build a human sized nest, and finally curl up nude into a ball inside the nest. Your body will solidify as if it was a rock. When attempting the ritual',
     roll: [STAT.INTELLIGENCE],
     tags: [TAGS.RITUAL],
-    tenPlus:
+    fullSuccess:
       'The ritual goes as planned. Your body cracks in half, and a raven the size of a bulldog emerges. This raven inherits your hitpoints and other stats, and has a 1d6 damage dice. It is able to fly and speak.',
-    sixToNine:
+    success:
       'The ritual goes mostly as planned. Your body cracks in half, and a raven the size of a cat emerges. This raven inherits your hitpoints and other stats, and has a 1d4 damage dice. It is able to fly and speak.',
-    otherwise: 'The ritual fails. Suffer an injury.',
+    failure: 'The ritual fails. Suffer an injury.',
     additionalInfo:
       'To return to your human body, the raven must return to its nest, and lay an egg. After a day, the egg will grow to the size of a human, and you will hatch from the egg. If the nest or the raven are destroyed before the egg is laid, you die. After attempting this ritual, you cannot attempt it again for a week.',
   },
@@ -742,11 +757,11 @@ export const SKILLS: Skill[] = [
       'This ritual requires dancing so erratically around a wooden or stone effigy of a seagull that you suffer a minor injury. The Storyteller will tell you what that injury is. When spending an hour to conduct a ritual dance, petitioning the spirits of the sky to bring down rain',
     roll: [STAT.CHARISMA],
     tags: [TAGS.RITUAL],
-    tenPlus:
+    fullSuccess:
       'The ritual goes as planned. The sky pours down rain for the next day, falling over more or less where you needed the rain to go, at the intensity you desire.',
-    sixToNine:
+    success:
       'The ritual goes mostly as planned. The Storyteller will give you a consequence.',
-    otherwise: 'The ritual fails. No rain is created.',
+    failure: 'The ritual fails. No rain is created.',
     additionalInfo:
       'After attempting this ritual, you cannot attempt it again for a week.',
   },
@@ -756,11 +771,11 @@ export const SKILLS: Skill[] = [
       'This ritual requires a sacrifice of 5 portions of fish – 5 uses of rations. When spending an hour to conduct a ritual, petitioning the murky gods of the sea for a person’s passage into their domain',
     roll: [STAT.CHARISMA],
     tags: [TAGS.RITUAL],
-    tenPlus:
+    fullSuccess:
       'The ritual goes as planned. The target gains the ability to breathe underwater for the remainder of the day.',
-    sixToNine:
+    success:
       'The ritual goes mostly as planned. The ritual has manifested itself through horrifying gills becoming present on the target. They cannot breathe outside of water for the remainder of the day. They suffer a minor injury to their neck after the magic wears off.',
-    otherwise:
+    failure:
       'The ritual fails. The target suffers a minor injury to their neck.',
     additionalInfo:
       'After attempting this ritual, you cannot attempt it again for a week.',
@@ -771,10 +786,21 @@ export const SKILLS: Skill[] = [
       'When sacrificing a human child in order to heal your permanent injuries',
     roll: NONE,
     tags: [TAGS.RITUAL],
-    tenPlus: 'The ritual goes as planned. The injury is healed.',
-    sixToNine:
+    fullSuccess: 'The ritual goes as planned. The injury is healed.',
+    success:
       'The ritual goes as mostly as planned. The injury is no longer permanent, and will heal next Rest & Reflect.',
-    otherwise: 'The ritual fails. ',
+    failure: 'The ritual fails. ',
+  },
+  {
+    name: 'Browse Magic Shop',
+    description:
+      'When you browse the magic shop, roll (prosperity die) + (size die)',
+    fullSuccess:
+      'They can select any item with the Magic Shop and buy it. They can roll again.',
+    success:
+      'They can select any item with the Magic Shop tag and buy it. They cannot roll again until conflicts advance.',
+    failure:
+      'The magic shop has no worthwhile items. They cannot roll again until the conflicts advance.',
   },
 ];
 
@@ -784,6 +810,9 @@ export const BLOOD_SACRIFICE_SKILL_ID = SKILLS.findIndex(
   (s) => s.name === 'Blood Sacrifice'
 );
 export const BOTANY_SKILL_ID = SKILLS.findIndex((s) => s.name === 'Botany');
+export const BROWSE_MAGIC_SHOP_SKILL_ID = SKILLS.findIndex(
+  (s) => s.name === 'Browse Magic Shop'
+);
 export const CHEMISTRY_SKILL_ID = SKILLS.findIndex(
   (s) => s.name === 'Chemistry'
 );
@@ -860,7 +889,9 @@ export const SIMPLE_PSYCHOKINESIS_SKILL_ID = SKILLS.findIndex(
 );
 export const SKULK_SKILL_ID = SKILLS.findIndex((s) => s.name === 'Skulk');
 export const SLUGGER_SKILL_ID = SKILLS.findIndex((s) => s.name === 'Slugger');
-export const SOLVE_PUZZLEBOX_SKILL_ID = SKILLS.findIndex((s) => s.name === 'Solve Puzzlebox');
+export const SOLVE_PUZZLEBOX_SKILL_ID = SKILLS.findIndex(
+  (s) => s.name === 'Solve Puzzlebox'
+);
 export const STURDY_SKILL_ID = SKILLS.findIndex((s) => s.name === 'Sturdy');
 export const SUMMON_LESSER_FAMILIAR_SKILL_ID = SKILLS.findIndex(
   (s) => s.name === 'Summon Lesser Familiar'

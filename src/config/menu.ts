@@ -48,6 +48,35 @@ export const mainMenu: NavItemWithChildren[] = [
       },
     ],
   },
+  {
+    title: 'Reference',
+    items: [
+      {
+        title: 'Backgrounds',
+        to: '/backgrounds',
+      },
+      {
+        title: 'Experiences',
+        to: '/experiences',
+      },
+      {
+        title: 'Items',
+        to: '/items',
+      },
+      {
+        title: 'Properties',
+        to: '/properties',
+      },
+      {
+        title: 'Services',
+        to: '/services',
+      },
+      {
+        title: 'Skills',
+        to: '/skills',
+      },
+    ],
+  },
 ];
 
 export const sideMenu: NavItemWithChildren[] = [];
