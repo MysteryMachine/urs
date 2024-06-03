@@ -7,14 +7,15 @@ export enum REWARD_TYPE {
   Skill,
   Property,
   Service,
-  Other
+  Other,
+  AND,
+  OR,
 }
 
 export const TAGS = {};
 
 export interface BaseReward {
   type: REWARD_TYPE;
-  tags?: string[];
   additionalInfo?: ReactNode;
   condition?: string;
 }
@@ -33,6 +34,7 @@ export interface SkillsPropertiesOrServicesReward extends BaseReward {
 export interface ItemReward extends BaseReward {
   type: REWARD_TYPE.Item;
   id?: number;
+  tags?: string[];
   amount: number;
 }
 
@@ -47,12 +49,9 @@ export type SimpleReward =
   | SkillsPropertiesOrServicesReward
   | OtherReward;
 
-export enum CHOICE_REWARD_TYPE {
-  AND,
-  OR,
-}
+export type CHOICE_REWARD_TYPE = REWARD_TYPE.OR | REWARD_TYPE.AND
 
-export type ChoiceReward = { type: CHOICE_REWARD_TYPE; reward: Reward[] };
+export type ChoiceReward = { type: CHOICE_REWARD_TYPE; rewards: Reward[] };
 
 export type Reward = SimpleReward | ChoiceReward;
 

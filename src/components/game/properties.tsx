@@ -12,7 +12,7 @@ export const RetainerExplainer = () => {
 
       <P>
         Every week, for every settlement you have a retainer in, roll
-        <I>(retainer size) * (prosperity die) * (size die)</I> and gain that
+        <I> (retainer size) * (prosperity die) * (size die)</I> and gain that
         many coins.
       </P>
     </>

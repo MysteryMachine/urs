@@ -34,7 +34,7 @@ export const TAGS = {
 };
 
 export const ITEMS: Item[] = [
-  { name: 'Coins' },
+  { name: 'Coins', description: 'basic currency'},
   {
     value: 20,
     variants: ['Shortsword', 'Mace', 'Spear'],

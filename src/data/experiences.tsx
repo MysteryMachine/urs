@@ -70,7 +70,7 @@ export const EXPERIENCES: Experience[] = [
         type: REWARD_TYPE.Item,
         id: Items.COINS_ID,
         amount: 14,
-        condition: 'Taken in a settlement of at least Large size',
+        condition: 'taken in a settlement of at least Large size',
       },
       {
         type: REWARD_TYPE.Item,
@@ -78,8 +78,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.SEARCH_FOR_TRAPS_SKILL_ID,
@@ -121,8 +121,8 @@ export const EXPERIENCES: Experience[] = [
         condition: 'Taken in a settlement of defenses of at least Guard',
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.STURDY_SKILL_ID,
@@ -171,8 +171,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.SCOUT_SKILL_ID,
@@ -222,8 +222,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.SUTURE_SKILL_ID,
@@ -259,8 +259,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 10,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.PICKPOCKET_SKILL_ID,
@@ -301,8 +301,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 10,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.SKULK_SKILL_ID,
@@ -348,8 +348,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.CITE_SOURCES_SKILL_ID,
@@ -385,8 +385,8 @@ export const EXPERIENCES: Experience[] = [
         amount: 6,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.HAGGLE_SKILL_ID,
@@ -407,8 +407,8 @@ export const EXPERIENCES: Experience[] = [
     tags: [TAGS.MUNDANE],
     reward: [
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Item,
             id: Items.PLATEMAIL_ID,
@@ -616,8 +616,8 @@ export const EXPERIENCES: Experience[] = [
     tags: [TAGS.MUNDANE],
     reward: [
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.SEANCE_SKILL_ID,
@@ -659,8 +659,8 @@ export const EXPERIENCES: Experience[] = [
         description: 'a Warrior’s Guild is added to the settlement'
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Skill,
             id: Skills.RIPOSTE_SKILL_ID,

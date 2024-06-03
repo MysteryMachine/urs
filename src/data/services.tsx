@@ -24,20 +24,20 @@ export const RETAINERS: Service[] = [
   {
     name: 'Small retainer',
     size: [1, 9],
-    description: 'given to knights, and minor nobility',
+    description: 'given to knights, and minor nobility.',
     tags: [TAGS.RETAINER],
   },
   {
     name: 'Medium retainer',
     size: [10, 50],
     description:
-      'given to the heads of noble families, barons, dukes, and so on',
+      'given to the heads of noble families, barons, dukes, and so on.',
     tags: [TAGS.RETAINER],
   },
   {
     name: 'Large retainer',
     size: [50, 200],
-    description: 'given to members of the royal family',
+    description: 'given to members of the royal family.',
     tags: [TAGS.RETAINER],
   },
 ];
@@ -45,7 +45,7 @@ export const RETAINERS: Service[] = [
 export const SERVICES: Service[] = [
   ...RETAINERS,
   {
-    name: 'A day’s rest at an inn',
+    name: 'A day’s rest at an inn.',
     cost: 1,
     billed: 1,
     tags: [TAGS.UNSPECIALIZED],

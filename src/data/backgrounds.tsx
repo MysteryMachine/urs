@@ -10,7 +10,7 @@ import { STAT } from './stats';
 
 export type Background = BackgroundExperience;
 
-const BACKGROUNDS: Background[] = [
+export const BACKGROUNDS: Background[] = [
   {
     name: 'Squire',
     description:
@@ -52,16 +52,16 @@ const BACKGROUNDS: Background[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Item,
             id: Items.WOODEN_SHIELD_ID,
             amount: 1,
           },
           {
-            type: CHOICE_REWARD_TYPE.AND,
-            reward: [
+            type: REWARD_TYPE.AND,
+            rewards: [
               {
                 type: REWARD_TYPE.Item,
                 id: Items.SHORTBOW_ID,
@@ -266,8 +266,8 @@ const BACKGROUNDS: Background[] = [
         amount: 4,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Item,
             id: Items.HOLY_BOOK_ID,
@@ -322,11 +322,11 @@ const BACKGROUNDS: Background[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
-            type: CHOICE_REWARD_TYPE.AND,
-            reward: [
+            type: REWARD_TYPE.AND,
+            rewards: [
               {
                 type: REWARD_TYPE.Item,
                 id: Items.TOBACCO_ID,
@@ -392,11 +392,11 @@ const BACKGROUNDS: Background[] = [
         amount: 1,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
-            type: CHOICE_REWARD_TYPE.AND,
-            reward: [
+            type: REWARD_TYPE.AND,
+            rewards: [
               {
                 type: REWARD_TYPE.Item,
                 id: Items.TOBACCO_ID,
@@ -421,8 +421,8 @@ const BACKGROUNDS: Background[] = [
         id: Properties.TITLE_ID,
       },
       {
-        type: CHOICE_REWARD_TYPE.OR,
-        reward: [
+        type: REWARD_TYPE.OR,
+        rewards: [
           {
             type: REWARD_TYPE.Item,
             id: Properties.HORSE_ID,
