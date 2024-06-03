@@ -4,6 +4,10 @@ import {
   REWARD_TYPE,
 } from './bge-base';
 import { STAT } from './stats';
+import * as Items from './items';
+import * as Skills from './skills';
+import * as Properties from './properties';
+import * as Services from './services'
 
 export enum REQUIREMENT_TYPE {
   ITEM,
@@ -19,7 +23,7 @@ export interface RequirementBase {
 export interface ItemRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.ITEM;
   amount: number;
-  id: number;
+  id: number | undefined;
 }
 
 export interface StatRequirement extends RequirementBase {
@@ -30,7 +34,7 @@ export interface StatRequirement extends RequirementBase {
 
 export interface SkillRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.SKILL;
-  id: number;
+  id: number | undefined;
 }
 
 export interface OtherRequirement extends RequirementBase {
@@ -55,67 +59,6 @@ export const TAGS = {
   SUPERNATURAL: 'Supernatural',
 };
 
-export const SUTURE_SKILL_ID = 217; // Placeholder ID for Suture skill
-export const FIELD_MEDICINE_SKILL_ID = 218; // Placeholder ID for Field Medicine skill
-export const MORAL_APPEAL_SKILL_ID = 219;
-export const COINS_ID = 107; // Assuming this ID has been used for coins
-export const TRAP_COMPONENTS_ID = 129; // Placeholder ID for trap components
-export const SEARCH_FOR_TRAPS_SKILL_ID = 208; // Placeholder ID for Search for Traps skill
-export const DISARM_SKILL_ID = 209; // Placeholder ID for Disarm skill
-export const SET_TRAP_SKILL_ID = 210; // Placeholder ID for Set Trap skill
-export const STURDY_SKILL_ID = 200; // Placeholder ID for Sturdy skill
-export const SLUGGER_SKILL_ID = 211; // Placeholder ID for Slugger skill
-export const FORMATION_SKILL_ID = 212; // Placeholder ID for Formation skill
-export const DETAINMENT_SKILL_ID = 213; // Placeholder ID for Detainment skill
-export const TAKE_AIM_SKILL_ID = 214; // Placeholder ID for Take Aim skill
-export const TRACK_SKILL_ID = 215; // Placeholder ID for Track skill
-export const PROWL_SKILL_ID = 216; // Placeholder ID for Prowl skill
-export const BOW_ID = 130; // Placeholder ID for a bow
-export const SCOUT_SKILL_ID = 0;
-export const RATION_ID = 0;
-// Assuming COINS_ID, PICKPOCKET_SKILL_ID, SEDUCTIVE_SKILL_ID, EYE_FOR_DECEIT_SKILL_ID, etc., are already defined.
-export const TEXTBOOK_ID = 150; // If not already defined
-export const CITE_SOURCES_SKILL_ID = 250;
-export const BOTANY_SKILL_ID = 251;
-export const CHEMISTRY_SKILL_ID = 252;
-export const LOCKPICK_SKILL_ID = 253;
-export const SEDUCTIVE_SKILL_ID = 221; // Placeholder ID for the Seductive skill
-export const PICKPOCKET_SKILL_ID = 222; // Placeholder ID for the Pickpocket skill
-export const EYE_FOR_DECEIT_SKILL_ID = 223; // Placeholder ID for the Eye for Deceit skill
-export const SKULK_SKILL_ID = 224; // Placeholder ID for the Skulk skill
-export const HAGGLE_SKILL_ID = 225; // Placeholder ID for the Haggle skill
-export const PLATEMAIL_ID = 300;
-export const COTTAGE_ID = 301;
-export const KNIGHTS_SWORD_ID = 302;
-export const HORSE_ID = 303;
-export const FENCE_SKILL_ID = 304;
-export const CARPENTERS_BADGE_ID = 305;
-export const SEARCH_CONNECTIONS_SKILL_ID = 306;
-export const RETAINER_ID = 307;
-export const BUSINESS_RETAINER_ID = 308;
-export const RECITE_SKILL_ID = 309;
-export const SPECIFIC_TEXTBOOK_ID = 311;
-export const BLESS_SKILL_ID = 312;
-export const PHASMOSENSITIVE_SKILL_ID = 313;
-export const HOLY_SYMBOL_ID = 314;
-export const HOLY_BOOK_ID = 315;
-export const SEANCE_SKILL_ID = 316;
-export const SIMPLE_PSYCHOKINESIS_SKILL_ID = 317;
-export const DETECT_MOOD_SKILL_ID = 318;
-export const WARRIORS_GUILD_ID = 319;
-export const RIPOSTE_SKILL_ID = 320;
-export const PARRY_SKILL_ID = 321;
-export const BELLOW_SKILL_ID = 322;
-export const TORTURE_SKILL_ID = 323;
-export const ENDURE_SKILL_ID = 324;
-export const WILLFUL_SKILL_ID = 325;
-export const FISH_GILL_RITUAL_SKILL_ID = 326;
-export const RAIN_DANCE_SKILL_ID = 327;
-export const SCARRED_ADVENTURER_ID = 328;
-export const INHUMAN_SKILL_ID = 329;
-export const RAVENMORPH_SKILL_ID = 330;
-export const BLOOD_SACRIFICE_SKILL_ID = 331;
-
 export const EXPERIENCES: Experience[] = [
   {
     name: 'Engineer’s Apprentice',
@@ -125,13 +68,13 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 14,
         condition: 'Taken in a settlement of at least Large size',
       },
       {
         type: REWARD_TYPE.Item,
-        id: TRAP_COMPONENTS_ID,
+        id: Items.TRAP_COMPONENTS_ID,
         amount: 1,
       },
       {
@@ -139,15 +82,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: SEARCH_FOR_TRAPS_SKILL_ID,
+            id: Skills.SEARCH_FOR_TRAPS_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: DISARM_SKILL_ID,
+            id: Skills.DISARM_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: SET_TRAP_SKILL_ID,
+            id: Skills.SET_TRAP_SKILL_ID,
           },
         ],
       },
@@ -173,7 +116,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 7,
         condition: 'Taken in a settlement of defenses of at least Guard',
       },
@@ -182,19 +125,19 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: STURDY_SKILL_ID,
+            id: Skills.STURDY_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: SLUGGER_SKILL_ID,
+            id: Skills.SLUGGER_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: FORMATION_SKILL_ID,
+            id: Skills.FORMATION_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: DETAINMENT_SKILL_ID,
+            id: Skills.DETAINMENT_SKILL_ID,
           },
         ],
       },
@@ -224,7 +167,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: RATION_ID,
+        id: Items.RATION_ID,
         amount: 1,
       },
       {
@@ -232,19 +175,19 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: SCOUT_SKILL_ID,
+            id: Skills.SCOUT_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: TAKE_AIM_SKILL_ID,
+            id: Skills.TAKE_AIM_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: TRACK_SKILL_ID,
+            id: Skills.TRACK_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: PROWL_SKILL_ID,
+            id: Skills.PROWL_SKILL_ID,
           },
         ],
       },
@@ -262,7 +205,7 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REQUIREMENT_TYPE.ITEM,
-        id: BOW_ID,
+        id: Items.BOW_ID,
         amount: 1,
       },
     ],
@@ -275,7 +218,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: RATION_ID,
+        id: Items.RATION_ID,
         amount: 1,
       },
       {
@@ -283,15 +226,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: SUTURE_SKILL_ID,
+            id: Skills.SUTURE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: FIELD_MEDICINE_SKILL_ID,
+            id: Skills.FIELD_MEDICINE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: MORAL_APPEAL_SKILL_ID,
+            id: Skills.MORAL_APPEAL_SKILL_ID,
           },
         ],
       },
@@ -312,7 +255,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 10,
       },
       {
@@ -320,15 +263,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: PICKPOCKET_SKILL_ID,
+            id: Skills.PICKPOCKET_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: SEDUCTIVE_SKILL_ID,
+            id: Skills.SEDUCTIVE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: EYE_FOR_DECEIT_SKILL_ID,
+            id: Skills.EYE_FOR_DECEIT_SKILL_ID,
           },
         ],
       },
@@ -354,7 +297,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 10,
       },
       {
@@ -362,15 +305,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: SKULK_SKILL_ID,
+            id: Skills.SKULK_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: PICKPOCKET_SKILL_ID,
+            id: Skills.PICKPOCKET_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: LOCKPICK_SKILL_ID,
+            id: Skills.LOCKPICK_SKILL_ID,
           },
         ],
       },
@@ -396,12 +339,12 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 4,
       },
       {
         type: REWARD_TYPE.Item,
-        id: TEXTBOOK_ID,
+        id: Items.TEXTBOOK_ID,
         amount: 1,
       },
       {
@@ -409,15 +352,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: CITE_SOURCES_SKILL_ID,
+            id: Skills.CITE_SOURCES_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: BOTANY_SKILL_ID,
+            id: Skills.BOTANY_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: CHEMISTRY_SKILL_ID,
+            id: Skills.CHEMISTRY_SKILL_ID,
           },
         ],
       },
@@ -438,7 +381,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 6,
       },
       {
@@ -446,11 +389,11 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: HAGGLE_SKILL_ID,
+            id: Skills.HAGGLE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: STURDY_SKILL_ID,
+            id: Skills.STURDY_SKILL_ID,
           },
         ],
       },
@@ -468,23 +411,23 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Item,
-            id: PLATEMAIL_ID,
+            id: Items.PLATEMAIL_ID,
             amount: 1,
           },
           {
             type: REWARD_TYPE.Property,
-            id: COTTAGE_ID,
+            id: Properties.COTTAGE_ID,
           },
         ],
       },
       {
         type: REWARD_TYPE.Item,
-        id: KNIGHTS_SWORD_ID,
+        id: Items.KNIGHTS_SWORD_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Property,
-        id: HORSE_ID,
+        id: Properties.HORSE_ID,
       },
     ],
     requires: [
@@ -502,7 +445,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: FENCE_SKILL_ID,
+        id: Skills.FENCE_SKILL_ID,
       },
     ],
     requires: [
@@ -520,13 +463,17 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Item,
-        id: CARPENTERS_BADGE_ID,
+        id: Items.CARPENTERS_BADGE_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: SEARCH_CONNECTIONS_SKILL_ID,
+        id: Skills.SEARCH_CONNECTIONS_SKILL_ID,
       },
+      {
+        type: REWARD_TYPE.Other,
+        description: "Add a Carpenter's Hall to this Settlement"
+      }
     ],
     requires: [
       {
@@ -543,8 +490,8 @@ export const EXPERIENCES: Experience[] = [
     tags: [TAGS.MUNDANE],
     reward: [
       {
-        type: REWARD_TYPE.Property,
-        id: RETAINER_ID,
+        type: REWARD_TYPE.Other,
+        description: 'Gain a retainer commensurate to your title',
       },
     ],
     requires: [
@@ -557,12 +504,13 @@ export const EXPERIENCES: Experience[] = [
   {
     name: 'Establish a Business',
     description:
-      'For each property you own in this settlement, gain a Retainer of size equal to <the cost of the property>/100.',
+      'You work to establish a business, gaining you recurring passive income.',
     tags: [TAGS.MUNDANE],
     reward: [
       {
-        type: REWARD_TYPE.Property,
-        id: BUSINESS_RETAINER_ID,
+        type: REWARD_TYPE.Other,
+        description:
+          'For each property you own in this settlement, gain a Retainer of size equal to <the cost of the property>/100.',
       },
     ],
     requires: [
@@ -580,7 +528,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: RECITE_SKILL_ID,
+        id: Skills.RECITE_SKILL_ID,
       },
     ],
     requires: [
@@ -599,17 +547,17 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: CITE_SOURCES_SKILL_ID,
+        id: Skills.CITE_SOURCES_SKILL_ID,
       },
     ],
     requires: [
       {
         type: REQUIREMENT_TYPE.SKILL,
-        id: RECITE_SKILL_ID,
+        id: Skills.RECITE_SKILL_ID,
       },
       {
         type: REQUIREMENT_TYPE.ITEM,
-        id: TEXTBOOK_ID,
+        id: Items.TEXTBOOK_ID,
         amount: 1,
       },
     ],
@@ -622,18 +570,18 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: BLESS_SKILL_ID,
+        id: Skills.BLESS_SKILL_ID,
       },
     ],
     requires: [
       {
         type: REQUIREMENT_TYPE.ITEM,
-        id: HOLY_SYMBOL_ID,
+        id: Items.HOLY_SYMBOL_ID,
         amount: 1,
       },
       {
         type: REQUIREMENT_TYPE.ITEM,
-        id: HOLY_BOOK_ID,
+        id: Items.HOLY_BOOK_ID,
         amount: 1,
       },
       {
@@ -650,7 +598,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: PHASMOSENSITIVE_SKILL_ID,
+        id: Skills.PHASMOSENSITIVE_SKILL_ID,
       },
     ],
     requires: [
@@ -672,15 +620,15 @@ export const EXPERIENCES: Experience[] = [
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: SEANCE_SKILL_ID,
+            id: Skills.SEANCE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: SIMPLE_PSYCHOKINESIS_SKILL_ID,
+            id: Skills.SIMPLE_PSYCHOKINESIS_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: DETECT_MOOD_SKILL_ID,
+            id: Skills.DETECT_MOOD_SKILL_ID,
           },
         ],
       },
@@ -688,7 +636,7 @@ export const EXPERIENCES: Experience[] = [
     requires: [
       {
         type: REQUIREMENT_TYPE.SKILL,
-        id: PHASMOSENSITIVE_SKILL_ID,
+        id: Skills.PHASMOSENSITIVE_SKILL_ID,
       },
       {
         type: REQUIREMENT_TYPE.OTHER,
@@ -704,26 +652,26 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: STURDY_SKILL_ID,
+        id: Skills.STURDY_SKILL_ID,
       },
       {
-        type: REWARD_TYPE.Property,
-        id: WARRIORS_GUILD_ID,
-      },
+        type: REWARD_TYPE.Other,
+        description: 'a Warrior’s Guild is added to the settlement'
+      }
       {
         type: CHOICE_REWARD_TYPE.OR,
         reward: [
           {
             type: REWARD_TYPE.Skill,
-            id: RIPOSTE_SKILL_ID,
+            id: Skills.RIPOSTE_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: PARRY_SKILL_ID,
+            id: Skills.PARRY_SKILL_ID,
           },
           {
             type: REWARD_TYPE.Skill,
-            id: BELLOW_SKILL_ID,
+            id: Skills.BELLOW_SKILL_ID,
           },
         ],
       },
@@ -744,7 +692,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: PHASMOSENSITIVE_SKILL_ID,
+        id: Skills.PHASMOSENSITIVE_SKILL_ID,
       },
     ],
     requires: [
@@ -767,15 +715,15 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REWARD_TYPE.Skill,
-        id: TORTURE_SKILL_ID,
+        id: Skills.TORTURE_SKILL_ID,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: ENDURE_SKILL_ID,
+        id: Skills.ENDURE_SKILL_ID,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: WILLFUL_SKILL_ID,
+        id: Skills.WILLFUL_SKILL_ID,
       },
     ],
     requires: [
@@ -793,11 +741,11 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Skill,
-        id: FISH_GILL_RITUAL_SKILL_ID,
+        id: Skills.FISH_GILL_RITUAL_SKILL_ID,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: RAIN_DANCE_SKILL_ID,
+        id: Skills.RAIN_DANCE_SKILL_ID,
       },
     ],
     requires: [
@@ -821,7 +769,7 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REWARD_TYPE.Skill,
-        id: TORTURE_SKILL_ID,
+        id: Skills.TORTURE_SKILL_ID,
       },
     ],
     requires: [
@@ -839,7 +787,7 @@ export const EXPERIENCES: Experience[] = [
     reward: [
       {
         type: REWARD_TYPE.Property,
-        id: SCARRED_ADVENTURER_ID,
+        id: Services.ADVENTURER_ID,
         additionalInfo:
           'this ally acts exactly like an Adventurer, but has no weekly cost',
       },
@@ -865,15 +813,15 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REWARD_TYPE.Skill,
-        id: INHUMAN_SKILL_ID,
+        id: Skills.INHUMAN_SKILL_ID,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: RAVENMORPH_SKILL_ID,
+        id: Skills.RAVENMORPH_SKILL_ID,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: BLOOD_SACRIFICE_SKILL_ID,
+        id: Skills.BLOOD_SACRIFICE_SKILL_ID,
       },
     ],
     requires: [

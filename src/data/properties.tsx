@@ -68,3 +68,8 @@ export const PROPERTIES: Property[] = [
       'Takes a month to build. Can store rations, tools, and up to 5000 coins of goods and property, as long as residents exist within. It can house up to 16 people. The house must be kept by 4 guards.',
   },
 ];
+
+export const COTTAGE_ID = PROPERTIES.findIndex((p) => p.name === 'Cottage');
+export const DONKEY_ID = PROPERTIES.findIndex((p) => p.name === 'Donkey');
+export const HORSE_ID = PROPERTIES.findIndex((p) => p.name === 'Horse');
+export const TITLE_ID = PROPERTIES.findIndex((p) => p.name === 'Title');

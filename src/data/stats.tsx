@@ -6,3 +6,9 @@ export enum STAT {
   WILLPOWER = 'Wil',
   CHARISMA = 'Cha',
 }
+
+export type ANY = "*"
+export const ANY: ANY = "*"
+
+export type NONE = "*"
+export const NONE: NONE = '*';

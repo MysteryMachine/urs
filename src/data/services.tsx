@@ -142,3 +142,7 @@ export const SERVICES: Service[] = [
     tags: [TAGS.SPECIALIZED],
   },
 ];
+
+export const ADVENTURER_ID = SERVICES.findIndex(
+  (i) => i.name === 'Adventurer'
+);

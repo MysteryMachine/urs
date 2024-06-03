@@ -7,6 +7,7 @@ export enum REWARD_TYPE {
   Skill,
   Property,
   Service,
+  Other
 }
 
 export const TAGS = {};
@@ -35,10 +36,16 @@ export interface ItemReward extends BaseReward {
   amount: number;
 }
 
+export interface OtherReward extends BaseReward {
+  type: REWARD_TYPE.Other;
+  description: string;
+}
+
 export type SimpleReward =
   | ItemReward
   | StatReward
-  | SkillsPropertiesOrServicesReward;
+  | SkillsPropertiesOrServicesReward
+  | OtherReward;
 
 export enum CHOICE_REWARD_TYPE {
   AND,

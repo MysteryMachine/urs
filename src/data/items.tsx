@@ -37,7 +37,7 @@ export const ITEMS: Item[] = [
   { name: 'Coins' },
   {
     value: 20,
-    variants: ['Shortsword', 'Mace', 'Battleaxe'],
+    variants: ['Shortsword', 'Mace', 'Spear'],
     damageDie: 6,
     weight: 2,
     tags: [TAGS.COMFORTABLE, TAGS.WEAPON],
@@ -77,7 +77,7 @@ export const ITEMS: Item[] = [
   },
   {
     value: 50,
-    variants: ['Leather Armor', 'Chain Armor'],
+    variants: ['Leather Armor', 'Chainmail'],
     defense: 1,
     weight: 3,
     tags: [TAGS.COMFORTABLE, TAGS.BODY_ARMOR],
@@ -141,7 +141,7 @@ export const ITEMS: Item[] = [
     weight: 1,
     description:
       'when obtaining a textbook, declare what subject the textbook is on',
-    skills: [Skills.VERIFY_TEXTBOOK_ID],
+    skills: [Skills.VERIFY_TEXTBOOK_SKILL_ID],
     tags: [TAGS.PROSPEROUS],
   },
 
@@ -362,21 +362,6 @@ export const ITEMS: Item[] = [
     tags: [TAGS.POISON, TAGS.APOTHECARY],
   },
   {
-    value: 1000,
-    name: 'Orb of Scrying',
-    description: 'when holding onto this orb, gain the Scry skill',
-    skills: [Skills.SCRY_ID],
-    tags: [TAGS.MAGIC_SHOP],
-  },
-  {
-    value: 1200,
-    name: 'Familiar’s Bell',
-    description:
-      'when holding onto this bell, gain the Summon Lesser Familiar skill',
-    skills: [Skills.SUMMON_LESSER_FAMILIAR_ID],
-    tags: [TAGS.MAGIC_SHOP],
-  },
-  {
     value: 800,
     name: 'Antifire Shield',
     description:
@@ -385,26 +370,10 @@ export const ITEMS: Item[] = [
     tags: [TAGS.MAGIC_SHOP],
   },
   {
-    value: 1600,
-    name: 'Coral-encrusted Astrolabe',
-    description:
-      'when holding onto this astrolabe, gain the Contemplate Astrolabe skill',
-    skills: [Skills.CONTEMPLATE_ASTROLABE_ID],
-    tags: [TAGS.MAGIC_SHOP],
-  },
-  {
     value: 200,
     name: 'Cheaters Deck',
     description:
       'card games played with this item will always favor the deck’s owner',
-    tags: [TAGS.MAGIC_SHOP],
-  },
-  {
-    value: 1600,
-    name: 'Sinner’s Puzzlebox',
-    description:
-      'when holding onto this puzzlebox, gain the Solve Puzzlebox skill',
-    skills: [Skills.SOLVE_PUZZLEBOX_ID],
     tags: [TAGS.MAGIC_SHOP],
   },
   {
@@ -457,4 +426,86 @@ export const ITEMS: Item[] = [
       'When wearing this badge, when entering a settlement, you may ask the Storyteller if a Carpenter’s Hall exists in the settlement. They must answer truthfully.',
     tags: [TAGS.EXPERIENCE],
   },
+  {
+    value: 1000,
+    name: 'Orb of Scrying',
+    description: 'when holding onto this orb, gain the Scry skill',
+    skills: [Skills.SCRY_SKILL_ID],
+    tags: [TAGS.MAGIC_SHOP],
+  },
+  {
+    value: 1200,
+    name: 'Familiar’s Bell',
+    description:
+      'when holding onto this bell, gain the Summon Lesser Familiar skill',
+    skills: [Skills.SUMMON_LESSER_FAMILIAR_SKILL_ID],
+    tags: [TAGS.MAGIC_SHOP],
+  },
+
+  {
+    value: 1600,
+    name: 'Coral-encrusted Astrolabe',
+    description:
+      'when holding onto this astrolabe, gain the Contemplate Astrolabe skill',
+    skills: [Skills.CONTEMPLATE_ASTROLABE_SKILL_ID],
+    tags: [TAGS.MAGIC_SHOP],
+  },
+  {
+    value: 1600,
+    name: 'Sinner’s Puzzlebox',
+    description:
+      'when holding onto this puzzlebox, gain the Solve Puzzlebox skill',
+    skills: [Skills.SOLVE_PUZZLEBOX_SKILL_ID],
+    tags: [TAGS.MAGIC_SHOP],
+  },
 ];
+
+export const ARROWS_ID = ITEMS.findIndex((i) => i.name === 'Arrows');
+export const BANDAGES_ID = ITEMS.findIndex((i) => i.name === 'Bandages');
+export const BOW_ID = ITEMS.findIndex((i) => i.name === 'Bow');
+export const CARPENTERS_BADGE_ID = ITEMS.findIndex(
+  (i) => i.name === "Carpenter's Badge"
+);
+export const COINS_ID = ITEMS.findIndex((i) => i.name === 'Coins');
+export const COTTON_WOOL_CLOTHES_ID = ITEMS.findIndex(
+   (i) => i.variants?.find((v) => 'Cotton Clothes')
+);
+export const DAGGER_ID = ITEMS.findIndex((i) => i.name === 'Dagger');
+export const DISTILLED_SPIRITS_ID = ITEMS.findIndex((i) => i.name === 'Distilled Spirits');
+export const HANDAXE_PICKAXE_HAMMER_ID = ITEMS.findIndex(
+  (i) => i.name === 'Handaxe, Pickaxe, or Hammer'
+);
+export const HERBS_AND_POULTICES_ID = ITEMS.findIndex(
+  (i) => i.name === 'Herbs and Poultices'
+);
+export const HOLY_BOOK_ID = ITEMS.findIndex((i) => i.name === 'Holy Book');
+export const HOLY_SYMBOL_ID = ITEMS.findIndex((i) => i.name === 'Holy Symbol');
+export const HORSE_ID = ITEMS.findIndex((i) => i.name === 'Horse');
+export const KNIGHTS_SWORD_ID = ITEMS.findIndex(
+  (i) => i.name === "Knight's Sword"
+);
+export const CHAINMAIL_LEATHER_ARMOR_ID = ITEMS.findIndex(
+  (i) => i.variants?.find((v) => 'Leather Armor')
+);
+export const LOCKPICKING_KIT_ID = ITEMS.findIndex(
+  (i) => i.name === 'Lockpicking Kit'
+);
+export const PIPE_ID = ITEMS.findIndex((i) => i.name === 'Pipe');
+export const PLATEMAIL_ID = ITEMS.findIndex((i) => i.name === 'Platemail');
+export const QUARTERSTAFF_ID = ITEMS.findIndex(
+  (i) => i.name === 'Quarterstaff'
+);
+export const QUIVER_ID = ITEMS.findIndex((i) => i.name === 'Quiver');
+export const RATION_ID = ITEMS.findIndex((i) => i.name === 'Ration');
+export const SHORTBOW_ID = ITEMS.findIndex((i) => i.name === 'Shortbow');
+export const SILK_CLOTHES_ID = ITEMS.findIndex((i) => i.name === 'Silk Clothes');
+export const SMALL_WEAPON_ID = ITEMS.findIndex((i) => i.variants?.find((v) => 'Mace'));
+export const TEXTBOOK_ID = ITEMS.findIndex((i) => i.name === 'Textbook');
+export const TOBACCO_ID = ITEMS.findIndex((i) => i.name === 'Tobacco');
+export const TRAP_COMPONENTS_ID = ITEMS.findIndex(
+  (i) => i.name === 'Trap Components'
+);
+export const WINE_ID = ITEMS.findIndex((i) => i.name === 'Wine');
+export const WOODEN_SHIELD_ID = ITEMS.findIndex(
+  (i) => i.name === 'Wooden Shield'
+);

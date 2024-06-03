@@ -1,48 +1,12 @@
-import { BackgroundExperience, CHOICE_REWARD_TYPE, REWARD_TYPE } from './bge-base';
+import {
+  BackgroundExperience,
+  CHOICE_REWARD_TYPE,
+  REWARD_TYPE,
+} from './bge-base';
 import * as Items from './items';
+import * as Skills from './skills';
+import * as Properties from './properties';
 import { STAT } from './stats';
-
-export const COINS_ID = 0;
-export const SHORTSWORD_ID = 1;
-export const MACE_ID = 2;
-export const SPEAR_ID = 3;
-export const CHAINMAIL_ID = 4;
-export const LEATHER_ARMOR_ID = 5;
-export const COTTON_WOOL_CLOTHES_ID = 6;
-export const WOODEN_SHIELD_ID = 7;
-export const SHORTBOW_ID = 8;
-export const ARROWS_ID = 9;
-export const QUIVER_ID = 10;
-export const STURDY_SKILL_ID = 11;
-export const RATION_ID = 100;
-export const DAGGER_ID = 104;
-export const LOCKPICKING_KIT_ID = 108;
-export const HANDAXE_PICKAXE_HAMMER_ID = 109;
-export const DONKEY_ID = 110;
-export const SCOUT_SKILL_ID = 200;
-export const LOCKPICKING_SKILL_ID = 201;
-export const HAGGLE_SKILL_ID = 202;
-export const HOLY_BOOK_ID = 113; 
-export const HOLY_SYMBOL_ID = 0;
-export const BANDAGES_ID = 114;
-export const BLESS_SKILL_ID = 205;
-export const CLOTHES_ID = 115;
-export const TOBACCO_ID = 116;
-export const PIPE_ID = 117;
-export const WINE_ID = 118;
-export const HERBS_AND_POULTICES_ID = 119;
-export const TEXTBOOK_ID = 120;
-export const RECITE_SKILL_ID = 206;
-export const COLLEGE_ID = 121;
-export const TITLE_ID = 122;
-export const SILK_CLOTHES_ID = 123;
-export const DISTILLED_SPIRITS_ID = 124;
-export const TITLE_OF_BARONS_CHILD_ID = 125;
-export const HORSE_ID = 126;
-export const COTTAGE_ID = 127;
-export const SEDUCTIVE_SKILL_ID = 206;
-export const QUARTERSTAFF_ID = 128;
-export const SKULK_SKILL_ID = 207;
 
 export type Background = BackgroundExperience;
 
@@ -69,62 +33,57 @@ const BACKGROUNDS: Background[] = [
       },
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 4,
       },
       {
         type: REWARD_TYPE.Item,
-        id: SHORTSWORD_ID,
+        id: Items.SMALL_WEAPON_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: MACE_ID,
+        id: Items.CHAINMAIL_LEATHER_ARMOR_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: SPEAR_ID,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
         amount: 1,
       },
       {
-        type: REWARD_TYPE.Item,
-        id: CHAINMAIL_ID,
-        amount: 1,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: LEATHER_ARMOR_ID,
-        amount: 1,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: COTTON_WOOL_CLOTHES_ID,
-        amount: 1,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: WOODEN_SHIELD_ID,
-        amount: 1,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: SHORTBOW_ID,
-        amount: 1,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: ARROWS_ID,
-        amount: 4,
-      },
-      {
-        type: REWARD_TYPE.Item,
-        id: QUIVER_ID,
-        amount: 1,
+        type: CHOICE_REWARD_TYPE.OR,
+        reward: [
+          {
+            type: REWARD_TYPE.Item,
+            id: Items.WOODEN_SHIELD_ID,
+            amount: 1,
+          },
+          {
+            type: CHOICE_REWARD_TYPE.AND,
+            reward: [
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.SHORTBOW_ID,
+                amount: 1,
+              },
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.ARROWS_ID,
+                amount: 4,
+              },
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.QUIVER_ID,
+                amount: 1,
+              },
+            ],
+          },
+        ],
       },
       {
         type: REWARD_TYPE.Skill,
-        id: STURDY_SKILL_ID,
+        id: Skills.STURDY_SKILL_ID,
       },
     ],
   },
@@ -150,42 +109,42 @@ const BACKGROUNDS: Background[] = [
       },
       {
         type: REWARD_TYPE.Item,
-        id: RATION_ID,
+        id: Items.RATION_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: SHORTBOW_ID,
+        id: Items.SHORTBOW_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: ARROWS_ID,
+        id: Items.ARROWS_ID,
         amount: 4,
       },
       {
         type: REWARD_TYPE.Item,
-        id: QUIVER_ID,
+        id: Items.QUIVER_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: DAGGER_ID,
+        id: Items.DAGGER_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: LEATHER_ARMOR_ID,
+        id: Items.CHAINMAIL_LEATHER_ARMOR_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: COTTON_WOOL_CLOTHES_ID,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: SCOUT_SKILL_ID,
+        id: Skills.SCOUT_SKILL_ID,
       },
     ],
   },
@@ -211,27 +170,27 @@ const BACKGROUNDS: Background[] = [
       },
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 4,
       },
       {
         type: REWARD_TYPE.Item,
-        id: DAGGER_ID,
+        id: Items.DAGGER_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: COTTON_WOOL_CLOTHES_ID,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: LOCKPICKING_KIT_ID,
+        id: Items.LOCKPICKING_KIT_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: LOCKPICKING_SKILL_ID,
+        id: Skills.LOCKPICKING_SKILL_ID,
       },
     ],
   },
@@ -257,27 +216,27 @@ const BACKGROUNDS: Background[] = [
       },
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 4,
       },
       {
         type: REWARD_TYPE.Item,
-        id: HANDAXE_PICKAXE_HAMMER_ID,
+        id: Items.HANDAXE_PICKAXE_HAMMER_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: COTTON_WOOL_CLOTHES_ID,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Item,
-        id: DONKEY_ID,
+        id: Properties.DONKEY_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: HAGGLE_SKILL_ID,
+        id: Skills.HAGGLE_SKILL_ID,
       },
     ],
   },
@@ -303,215 +262,223 @@ const BACKGROUNDS: Background[] = [
       },
       {
         type: REWARD_TYPE.Item,
-        id: COINS_ID,
+        id: Items.COINS_ID,
         amount: 4,
       },
       {
         type: CHOICE_REWARD_TYPE.OR,
-        reward:
-        [
-        {
-          type: REWARD_TYPE.Item,
-          id: HOLY_BOOK_ID,
-          amount: 1,
-        },
-        {
-          type: REWARD_TYPE.Item,
-          id: HOLY_SYMBOL_ID,
-          amount: 1,
-        },
-      ]},
-      {
-        type: REWARD_TYPE.Item,
-        id: BANDAGES_ID,
-        amount: 1, 
+        reward: [
+          {
+            type: REWARD_TYPE.Item,
+            id: Items.HOLY_BOOK_ID,
+            amount: 1,
+          },
+          {
+            type: REWARD_TYPE.Item,
+            id: Items.HOLY_SYMBOL_ID,
+            amount: 1,
+          },
+        ],
       },
       {
         type: REWARD_TYPE.Item,
-        id: COTTON_WOOL_CLOTHES_ID,
+        id: Items.BANDAGES_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
         amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
-        id: BLESS_SKILL_ID,
+        id: Skills.BLESS_SKILL_ID,
       },
     ],
   },
   {
-  name: "Scholar",
-  description: "Your noble parents had you under the tutelage of an esteemed scholar. You grew erudite. You began your adventure with a book, and some herbal samples you had been studying. You have the ability to impart a great deal of knowledge to colleagues willing to listen.",
-  reward: [
-    {
-      type: REWARD_TYPE.Stat,
-      stat: STAT.INTELLIGENCE,
-      amount: 2
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: COINS_ID,
-      amount: 10
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: CLOTHES_ID,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: DAGGER_ID,
-      amount: 1
-    },
-    {
-      type: CHOICE_REWARD_TYPE.OR, reward:
-      [
-        {type: CHOICE_REWARD_TYPE.AND, reward: [{
-          type: REWARD_TYPE.Item,
-          id: TOBACCO_ID,
-          amount: 1
-        },
-        {
-          type: REWARD_TYPE.Item,
-          id: PIPE_ID,
-          amount: 1
-        }]},
-        {
-          type: REWARD_TYPE.Item,
-          id: WINE_ID,
-          amount: 1
-        }
-      ],
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: HERBS_AND_POULTICES_ID,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: TEXTBOOK_ID,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Skill,
-      id: RECITE_SKILL_ID
-    },
-    {
-      type: REWARD_TYPE.Property,
-      id: COLLEGE_ID,
-    },
-    {
-      type: REWARD_TYPE.Property,
-      id: TITLE_ID,
-      additionalInfo: 'representing a title of scholar'
-    }
-  ]
-}
-{
-  name: "Socialite",
-  description: "You lived in the lap of luxury, spending most of your childhood carousing in balls and other luxurious events. You became very good at navigating social situations. You began your adventure with your favorite horse, money, and some of your favorite vices. Your ability to arouse and carouse allows you to persuade others more easily.",
-  reward: [
-    {
-      type: REWARD_TYPE.Stat,
-      stat: STAT.CHARISMA,
-      amount: 2
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: COINS_ID,
-      amount: 100
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: SILK_CLOTHES_ID,
-      amount: 1
-    },
-    {
-      type: CHOICE_REWARD_TYPE.OR, 
-      reward: [
-        {
-          type: CHOICE_REWARD_TYPE.AND, 
-          reward: [
-            {
-              type: REWARD_TYPE.Item,
-              id: TOBACCO_ID,
-              amount: 1
-            },
-            {
-              type: REWARD_TYPE.Item,
-              id: PIPE_ID,
-              amount: 1
-            }
-          ]
-        },
-        {
-          type: REWARD_TYPE.Item,
-          id: DISTILLED_SPIRITS_ID,
-          amount: 1
-        }
-      ]
-    },
-    {
-      type: REWARD_TYPE.Property,
-      id: TITLE_ID
-    },
-    {
-      type: CHOICE_REWARD_TYPE.OR,
-      reward: [
-        {
-          type: REWARD_TYPE.Item,
-          id: HORSE_ID,
-          amount: 1
-        },
-        {
-          type: REWARD_TYPE.Property,
-          id: COTTAGE_ID
-        }
-      ]
-    },
-    {
-      type: REWARD_TYPE.Skill,
-      id: SEDUCTIVE_SKILL_ID
-    }
-  ]
-}, {
-  name: "Star-Cursed",
-  description: "You were a sick, unwanted child, born under an unlucky star. The seemingly supernatural disease sapped your body, leaving you frail and weak. You started your adventure upon the discovery of a magical artifact in the rubble of a local ruin.",
-  reward: [
-    {
-      type: REWARD_TYPE.Stat,
-      stat: STAT.CONSTITUTION,
-      amount: -1
-    },
-    {
-      type: REWARD_TYPE.Stat,
-      stat: STAT.WILLPOWER,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: QUARTERSTAFF_ID,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: COTTON_WOOL_CLOTHES_ID,
-      amount: 1
-    },
-    {
-      type: REWARD_TYPE.Item,
-      id: BANDAGES_ID,
-      amount: 1,
-    },
-    {
-      type: REWARD_TYPE.Item,
-      amount: 1,
-      tags: [Items.TAGS.MAGIC_SHOP]
-    },
-    {
-      type: REWARD_TYPE.Skill,
-      id: SKULK_SKILL_ID
-    }
-  ]
-}
-
+    name: 'Scholar',
+    description:
+      'Your noble parents had you under the tutelage of an esteemed scholar. You grew erudite. You began your adventure with a book, and some herbal samples you had been studying. You have the ability to impart a great deal of knowledge to colleagues willing to listen.',
+    reward: [
+      {
+        type: REWARD_TYPE.Stat,
+        stat: STAT.INTELLIGENCE,
+        amount: 2,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.COINS_ID,
+        amount: 10,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.DAGGER_ID,
+        amount: 1,
+      },
+      {
+        type: CHOICE_REWARD_TYPE.OR,
+        reward: [
+          {
+            type: CHOICE_REWARD_TYPE.AND,
+            reward: [
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.TOBACCO_ID,
+                amount: 1,
+              },
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.PIPE_ID,
+                amount: 1,
+              },
+            ],
+          },
+          {
+            type: REWARD_TYPE.Item,
+            id: Items.WINE_ID,
+            amount: 1,
+          },
+        ],
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.HERBS_AND_POULTICES_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.TEXTBOOK_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Skill,
+        id: Skills.RECITE_SKILL_ID,
+      },
+      // {
+      //   type: REWARD_TYPE.Property,
+      //   id: COLLEGE_ID,
+      // },
+      {
+        type: REWARD_TYPE.Property,
+        id: Properties.TITLE_ID,
+        additionalInfo: 'representing a title of scholar',
+      },
+    ],
+  },
+  {
+    name: 'Socialite',
+    description:
+      'You lived in the lap of luxury, spending most of your childhood carousing in balls and other luxurious events. You became very good at navigating social situations. You began your adventure with your favorite horse, money, and some of your favorite vices. Your ability to arouse and carouse allows you to persuade others more easily.',
+    reward: [
+      {
+        type: REWARD_TYPE.Stat,
+        stat: STAT.CHARISMA,
+        amount: 2,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.COINS_ID,
+        amount: 100,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.SILK_CLOTHES_ID,
+        amount: 1,
+      },
+      {
+        type: CHOICE_REWARD_TYPE.OR,
+        reward: [
+          {
+            type: CHOICE_REWARD_TYPE.AND,
+            reward: [
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.TOBACCO_ID,
+                amount: 1,
+              },
+              {
+                type: REWARD_TYPE.Item,
+                id: Items.PIPE_ID,
+                amount: 1,
+              },
+            ],
+          },
+          {
+            type: REWARD_TYPE.Item,
+            id: Items.DISTILLED_SPIRITS_ID,
+            amount: 1,
+          },
+        ],
+      },
+      {
+        type: REWARD_TYPE.Property,
+        id: Properties.TITLE_ID,
+      },
+      {
+        type: CHOICE_REWARD_TYPE.OR,
+        reward: [
+          {
+            type: REWARD_TYPE.Item,
+            id: Properties.HORSE_ID,
+            amount: 1,
+          },
+          {
+            type: REWARD_TYPE.Property,
+            id: Properties.COTTAGE_ID,
+          },
+        ],
+      },
+      {
+        type: REWARD_TYPE.Skill,
+        id: Skills.SEDUCTIVE_SKILL_ID,
+      },
+    ],
+  },
+  {
+    name: 'Star-Cursed',
+    description:
+      'You were a sick, unwanted child, born under an unlucky star. The seemingly supernatural disease sapped your body, leaving you frail and weak. You started your adventure upon the discovery of a magical artifact in the rubble of a local ruin.',
+    reward: [
+      {
+        type: REWARD_TYPE.Stat,
+        stat: STAT.CONSTITUTION,
+        amount: -1,
+      },
+      {
+        type: REWARD_TYPE.Stat,
+        stat: STAT.WILLPOWER,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.QUARTERSTAFF_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.COTTON_WOOL_CLOTHES_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        id: Items.BANDAGES_ID,
+        amount: 1,
+      },
+      {
+        type: REWARD_TYPE.Item,
+        amount: 1,
+        tags: [Items.TAGS.MAGIC_SHOP],
+      },
+      {
+        type: REWARD_TYPE.Skill,
+        id: Skills.SKULK_SKILL_ID,
+      },
+    ],
+  },
 ];
