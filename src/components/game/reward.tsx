@@ -15,7 +15,7 @@ const renderReward = (reward: BGEBase.Reward | string): string => {
       .slice(0, -1)
       .map(renderReward)
       .join(', ')
-      .concat(reward.type === BGEBase.REWARD_TYPE.AND ? 'and ' : 'or ')
+      .concat(reward.type === BGEBase.REWARD_TYPE.AND ? ' and ' : ' or ')
       .concat(renderReward(reward.rewards.slice(-1)[0]));
   } else if (
     reward.type === BGEBase.REWARD_TYPE.Item &&
@@ -24,27 +24,41 @@ const renderReward = (reward: BGEBase.Reward | string): string => {
     return reward.amount
       .toString()
       .concat(' ')
-      .concat(reward.id ? ITEMS[reward.id || -1]?.name || '' : '')
+      .concat(reward.id ? ITEMS[reward.id]?.name || '' : '')
+      .concat(
+        reward.id && ITEMS[reward.id] && ITEMS[reward.id].variants
+          ? // @ts-ignore
+            ITEMS[reward.id].variants
+              .slice(0, -1)
+              .join(', ')
+              .concat(', or ')
+              // @ts-ignore
+              .concat(ITEMS[reward.id].variants.slice(-1)[0]) || ''
+          : ''
+      )
       .concat(reward.amount > 1 ? 's' : '')
       .concat(reward.condition ? ' if '.concat(reward.condition) : '')
-      .concat('.');
+      .concat(' ');
   } else if (
     reward.type === BGEBase.REWARD_TYPE.Item &&
     reward.tags !== undefined
   ) {
     return `any item tagged ${reward.tags.join(' ')}`;
   } else if (reward.type === BGEBase.REWARD_TYPE.Property) {
-    return (PROPERTIES[reward.id || -1]?.name || '').concat(
+    return 'a '.concat(PROPERTIES[reward.id]?.name || '').concat(
       reward.condition ? ' if '.concat(reward.condition) : ''
     );
   } else if (reward.type === BGEBase.REWARD_TYPE.Service) {
-    return (SERVICES[reward.id || -1]?.name || '').concat(
+    return (SERVICES[reward.id]?.name || '').concat(
       reward.condition ? ' if '.concat(reward.condition) : ''
     );
   } else if (reward.type === BGEBase.REWARD_TYPE.Skill) {
-    return `the ${SKILLS[reward.id || -1]?.name || ''} skill`;
+    return `the ${SKILLS[reward.id]?.name || ''} skill`;
   } else if (reward.type === BGEBase.REWARD_TYPE.Stat) {
-    return (reward.amount > 0 ? '+' : '').concat(reward.amount.toString()).concat(' ').concat(reward.stat);
+    return (reward.amount > 0 ? '+' : '')
+      .concat(reward.amount.toString())
+      .concat(' ')
+      .concat(reward.stat);
   } else if (reward.type === BGEBase.REWARD_TYPE.Other) {
     return reward.description;
   }

@@ -10,14 +10,14 @@ import { STAT } from './stats';
 
 export type Background = BackgroundExperience;
 
-const SQUIRE_ID = 'SQUIRE_ID'
-const POACHER_ID = 'POACHER_ID'
-const RASCAL_ID = 'RASCAL_ID'
-const APPRENTICE_ID = 'APPRENTICE_ID'
-const SEMINARY_ID = 'SEMINARY_ID'
-const SCHOLAR_ID = 'SCHOLAR_ID'
-const SOCIALITE_ID = 'SOCIALITE_ID'
-const STAR_CURSED_ID = 'STAR_CURSED_ID'
+const SQUIRE_ID = 'SQUIRE_ID';
+const POACHER_ID = 'POACHER_ID';
+const RASCAL_ID = 'RASCAL_ID';
+const APPRENTICE_ID = 'APPRENTICE_ID';
+const SEMINARY_ID = 'SEMINARY_ID';
+const SCHOLAR_ID = 'SCHOLAR_ID';
+const SOCIALITE_ID = 'SOCIALITE_ID';
+const STAR_CURSED_ID = 'STAR_CURSED_ID';
 
 export const BACKGROUNDS: Record<string, Background> = {
   [SQUIRE_ID]: {
@@ -98,8 +98,8 @@ export const BACKGROUNDS: Record<string, Background> = {
     ],
   },
   [POACHER_ID]: {
-  name: 'Poacher',
-      sortNum: 1,
+    name: 'Poacher',
+    sortNum: 1,
     description:
       'You and your family lived in a cabin, where you poached animals for food. Your body is well suited for combat, and your eyes are sharp. You began your adventure with the tools of the trade, and the skills to survey the land.',
     reward: [
@@ -243,9 +243,8 @@ export const BACKGROUNDS: Record<string, Background> = {
         amount: 1,
       },
       {
-        type: REWARD_TYPE.Item,
+        type: REWARD_TYPE.Property,
         id: Properties.DONKEY_ID,
-        amount: 1,
       },
       {
         type: REWARD_TYPE.Skill,
@@ -440,9 +439,8 @@ export const BACKGROUNDS: Record<string, Background> = {
         type: REWARD_TYPE.OR,
         rewards: [
           {
-            type: REWARD_TYPE.Item,
+            type: REWARD_TYPE.Property,
             id: Properties.HORSE_ID,
-            amount: 1,
           },
           {
             type: REWARD_TYPE.Property,
@@ -457,8 +455,8 @@ export const BACKGROUNDS: Record<string, Background> = {
     ],
   },
   [STAR_CURSED_ID]: {
-  name: 'Star-Cursed',
-      sortNum: 100,
+    name: 'Star-Cursed',
+    sortNum: 100,
     description:
       'You were a sick, unwanted child, born under an unlucky star. The seemingly supernatural disease sapped your body, leaving you frail and weak. You started your adventure upon the discovery of a magical artifact in the rubble of a local ruin.',
     reward: [
@@ -500,4 +498,6 @@ export const BACKGROUNDS: Record<string, Background> = {
   },
 };
 
-export const BACKGROUNDS_ARR : Background[] = Object.values(BACKGROUNDS).sort((a, b) => a.sortNum - b.sortNum)
+export const BACKGROUNDS_ARR: Background[] = Object.values(BACKGROUNDS).sort(
+  (a, b) => a.sortNum - b.sortNum
+);

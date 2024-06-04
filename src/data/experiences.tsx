@@ -23,7 +23,7 @@ export interface RequirementBase {
 export interface ItemRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.ITEM;
   amount: number;
-  id: number;
+  id: string;
 }
 
 export interface StatRequirement extends RequirementBase {
@@ -34,7 +34,7 @@ export interface StatRequirement extends RequirementBase {
 
 export interface SkillRequirement extends RequirementBase {
   type: REQUIREMENT_TYPE.SKILL;
-  id: number;
+  id: string;
 }
 
 export interface OtherRequirement extends RequirementBase {
@@ -345,7 +345,7 @@ export const EXPERIENCES: Record<string, Experience> = {
           },
           {
             type: REWARD_TYPE.Skill,
-            id: Skills.LOCKPICK_SKILL_ID,
+            id: Skills.LOCKPICKING_SKILL_ID,
           },
         ],
       },
@@ -885,4 +885,6 @@ export const EXPERIENCES: Record<string, Experience> = {
   },
 };
 
-export const EXPERIENCE_ARR: Experience[] = Object.values(EXPERIENCES).sort((a, b) => a.sortNum - b.sortNum)
+export const EXPERIENCE_ARR: Experience[] = Object.values(EXPERIENCES).sort(
+  (a, b) => a.sortNum - b.sortNum
+);

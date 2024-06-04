@@ -88,12 +88,12 @@ const SkillsPage = () => {
   return (
     <>
       <PageHeader>
-        <PageHeaderHeading>
-          Skills
-        </PageHeaderHeading>
+        <PageHeaderHeading>Skills</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Skills.SKILLS.map((s) => <SkillCard skill={s} />)}
+        {Skills.SKILLS_ARR.map((s) => (
+          <SkillCard skill={s} />
+        ))}
       </div>
     </>
   );

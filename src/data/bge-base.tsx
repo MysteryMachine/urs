@@ -28,12 +28,12 @@ export interface StatReward extends BaseReward {
 
 export interface SkillsPropertiesOrServicesReward extends BaseReward {
   type: REWARD_TYPE.Skill | REWARD_TYPE.Service | REWARD_TYPE.Property;
-  id: number;
+  id: string;
 }
 
 export interface ItemReward extends BaseReward {
   type: REWARD_TYPE.Item;
-  id?: number;
+  id?: string;
   tags?: string[];
   amount: number;
 }
@@ -49,7 +49,7 @@ export type SimpleReward =
   | SkillsPropertiesOrServicesReward
   | OtherReward;
 
-export type CHOICE_REWARD_TYPE = REWARD_TYPE.OR | REWARD_TYPE.AND
+export type CHOICE_REWARD_TYPE = REWARD_TYPE.OR | REWARD_TYPE.AND;
 
 export type ChoiceReward = { type: CHOICE_REWARD_TYPE; rewards: Reward[] };
 
@@ -58,7 +58,7 @@ export type Reward = SimpleReward | ChoiceReward;
 export interface BackgroundExperience {
   name: string;
   description: string;
-  tags?: string[],
+  tags?: string[];
   reward: Reward[];
   sortNum: number;
 }

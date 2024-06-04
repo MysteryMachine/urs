@@ -25,7 +25,7 @@ const PropertiesPage = () => {
         <PageHeaderHeading>Properties</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Properties.PROPERTIES.map((s) => (
+        {Properties.PROPERTIES_ARR.map((s) => (
           <PropertyCard property={s} />
         ))}
       </div>

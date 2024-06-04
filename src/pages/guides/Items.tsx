@@ -56,7 +56,7 @@ const ItemsPage = () => {
         <PageHeaderHeading>Items</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Items.ITEMS.map((s) => (
+        {Items.ITEMS_ARR.map((s) => (
           <ItemCard item={s} />
         ))}
       </div>

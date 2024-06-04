@@ -18,7 +18,7 @@ const BackgroundCard = ({
     <Card className="mb-8">
       <CardHeader>
         <P>
-          <Accent>{background.name}: </Accent> {background.description}.
+          <Accent>{background.name}: </Accent> {background.description}
         </P>
       </CardHeader>
       <CardContent>

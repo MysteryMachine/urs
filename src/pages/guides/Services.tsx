@@ -44,7 +44,7 @@ const ServicesPage = () => {
         <PageHeaderHeading>Services</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Services.SERVICES.map((s) => (
+        {Services.SERVICES_ARR.map((s) => (
           <ServiceCard service={s} />
         ))}
       </div>

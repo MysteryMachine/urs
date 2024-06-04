@@ -31,7 +31,7 @@ const renderRequire = (r: Experiences.Requirement) => {
           <I>Requires: {experience.requires.map(renderRequire).join(', ')}.</I>
         </P>
         <P>
-          <Accent>{experience.name}: </Accent> {experience.description}.
+          <Accent>{experience.name}: </Accent> {experience.description}
         </P>
       </CardHeader>
       <CardContent>
