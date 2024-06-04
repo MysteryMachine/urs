@@ -55,7 +55,7 @@ const ExperiencesPage = () => {
         <PageHeaderHeading>Experiences</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Experiences.EXPERIENCES.map((s) => (
+        {Experiences.EXPERIENCE_ARR.map((s) => (
           <ExperienceCard experience={s} />
         ))}
       </div>

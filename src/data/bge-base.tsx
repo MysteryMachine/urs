@@ -60,4 +60,5 @@ export interface BackgroundExperience {
   description: string;
   tags?: string[],
   reward: Reward[];
+  sortNum: number;
 }

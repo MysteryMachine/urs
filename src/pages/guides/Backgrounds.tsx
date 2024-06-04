@@ -40,7 +40,7 @@ const BackgroundsPage = () => {
         <PageHeaderHeading>Backgrounds</PageHeaderHeading>
       </PageHeader>
       <div>
-        {Backgrounds.BACKGROUNDS.map((s) => (
+        {Backgrounds.BACKGROUNDS_ARR.map((s) => (
           <BackgroundCard background={s} />
         ))}
       </div>

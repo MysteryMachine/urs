@@ -7,7 +7,7 @@ import { STAT } from './stats';
 import * as Items from './items';
 import * as Skills from './skills';
 import * as Properties from './properties';
-import * as Services from './services'
+import * as Services from './services';
 
 export enum REQUIREMENT_TYPE {
   ITEM,
@@ -59,8 +59,35 @@ export const TAGS = {
   SUPERNATURAL: 'Supernatural',
 };
 
-export const EXPERIENCES: Experience[] = [
-  {
+const ENG_APT_ID = 'ENG_APT_ID';
+const CITY_GUARD_ID = 'CITY_GUARD_ID';
+const OUTLANDER_ID = 'OUTLANDER_ID';
+const CHURCH_FELLOW_ID = 'CHURCH_FELLOW_ID';
+const SCAM_ARTIST_ID = 'SCAM_ARTIST_ID';
+const PICKPOCKET_ID = 'PICKPOCKET_ID';
+const TUTOR_ID = 'TUTOR_ID';
+const MENIAL_LABOR_ID = 'MENIAL_LABOR_ID';
+const KNIGHTED_ID = 'KNIGHTED_ID';
+const GANG_INDUCTION_ID = 'GANG_INDUCTION_ID';
+const CARPENTERS_HALL_INDUCTION_ID = 'CARPENTERS_HALL_INDUCTION_ID';
+const ESTABLISH_BUSINESS_ID = 'ESTABLISH_BUSINESS_ID';
+const ESTABLISH_RETAINER_ID = 'ESTABLISH_RETAINER_ID';
+const LECTURE_HALL_ID = 'LECTURE_HALL_ID';
+const INTENSE_RESEARCH_ID = 'INTENSE_RESEARCH_ID';
+const THE_CIRCLE_OF_BLOOD_ID = 'THE_CIRCLE_OF_BLOOD_ID';
+const THE_GOD_OF_MAN_ID = 'THE_GOD_OF_MAN_ID';
+const MEDIUM_CONSULTATION_ID = 'MEDIUM_CONSULTATION_ID';
+const SPIRITIST_SOCIETY_ID = 'SPRITIST_SOCIETY_ID';
+const WARRIORS_GUILD_ID = 'WARRIORS_GUILD_ID';
+const HOSPITALIZED_ID = 'HOSPITALIZED_ID';
+const ANGELS_TO_SOME_ID = 'ANGELS_TO_SOME';
+const HYPERTYPHOON_ID = 'HYPERTYPHOON_ID';
+const BEFORE_THE_ECLIPSE_ID = 'BEFORE_THE_ECLIPSE';
+const THE_LUNAR_ECLIPSE_ID = 'THE_LUNAR_ECLIPSE';
+
+export const EXPERIENCES: Record<string, Experience> = {
+  [ENG_APT_ID]: {
+    sortNum: 0,
     name: 'Engineer’s Apprentice',
     description:
       'Your analytical mind and sharp fingers make you a good candidate for an apprenticeship at a local engineer’s shop. You make a living for a month assisting them. This deepens your knowledge of mechanics and engineering. You think you can apply some of this on your adventures.',
@@ -108,7 +135,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [CITY_GUARD_ID]: {
+    sortNum: 1,
     name: 'City Guard',
     description:
       'Intent on keeping your combat skills, you make a living for a month as a city guard. You spend your time walking around, settling petty disputes, and occasionally you fight off a petty criminal. You find yourself in better physical condition, and with some improved social skills.',
@@ -159,7 +187,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [OUTLANDER_ID]: {
+    sortNum: 2,
     name: 'Outlander',
     description:
       'Finding work in the city is not easy, and you think it better for you to take your chances hunting in the local wilderness. You live off the land for a month, poaching wild animals. You build up your knowledge of survival and navigation in this time.',
@@ -210,7 +239,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [CHURCH_FELLOW_ID]: {
+    sortNum: 3,
     name: 'Church Fellow',
     description:
       'Volunteering at the church is not glamorous, nor does it pay, but you found yourself housed and fed for a month. In this time, you aided the church in fundraising, caring for the sick, and with other menial tasks. You find yourself more knowledgeable about basic medical procedures, and in haggling around town.',
@@ -247,7 +277,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [SCAM_ARTIST_ID]: {
+    sortNum: 4,
     name: 'Scam Artist',
     description:
       'Why work hard when there are so many marks about? As soon as the party split up, you sat yourself down at a bar, and got to work scamming drunks and dullards out of their coins. You became even more silver-tongued than before, and, dare you say, perhaps even more good looking.',
@@ -289,7 +320,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [PICKPOCKET_ID]: {
+    sortNum: 5,
     name: 'Pickpocket',
     description:
       'Working was never your thing, and you decided to lay low for the month, and enjoy the wealth that can be found right in people’s pockets. You even learned a few new tricks during your time off.',
@@ -331,7 +363,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [TUTOR_ID]: {
+    sortNum: 6,
     name: 'Tutor',
     description:
       'The snotty child of some nobleman needed your tutelage. It didn’t pay much other than food and board, but you were able to sneak a textbook from their library as an additional recompense. At least you were able to get a little bit of extra studying in.',
@@ -373,7 +406,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [MENIAL_LABOR_ID]: {
+    sortNum: 7,
     name: 'Menial Labor',
     description:
       'You’re a bit of a waste of skin, with not enough talent to do much of anything with your time. You gritted your teeth, and took a tiring job doing manual labor.',
@@ -400,7 +434,8 @@ export const EXPERIENCES: Experience[] = [
     ],
     requires: [],
   },
-  {
+  [KNIGHTED_ID]: {
+    sortNum: 10000,
     name: 'Knighted',
     description:
       'Your deeds have earned you the title of Knight in this settlement. For your deeds, you’ve been granted a horse, a knight’s sword, and some other rewards.',
@@ -437,7 +472,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [GANG_INDUCTION_ID]: {
+    sortNum: 10001,
     name: 'Gang Induction',
     description:
       'Word on the street has it that you’re reliable, and that you keep your mouth shut. A local gang of criminals inducts you into their ranks.',
@@ -455,7 +491,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [CARPENTERS_HALL_INDUCTION_ID]: {
+    sortNum: 10200,
     name: 'Carpenter’s Hall Induction',
     description:
       'You join a local Carpenter’s Hall, a place where the wealthy and powerful establish connections and build relationships. It is rumored that higher ranking Carpenters learn how to cast spells to cement their place in the world.',
@@ -472,8 +509,8 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REWARD_TYPE.Other,
-        description: "Add a Carpenter's Hall to this Settlement"
-      }
+        description: "Add a Carpenter's Hall to this Settlement",
+      },
     ],
     requires: [
       {
@@ -483,7 +520,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [ESTABLISH_RETAINER_ID]: {
+    sortNum: 10100,
     name: 'Establish a Retainer',
     description:
       'You leverage your influence in this settlement to generate some recurring income.',
@@ -501,7 +539,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [ESTABLISH_BUSINESS_ID]: {
+    sortNum: 10101,
     name: 'Establish a Business',
     description:
       'You work to establish a business, gaining you recurring passive income.',
@@ -520,7 +559,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [LECTURE_HALL_ID]: {
+    sortNum: 10003,
     name: 'Lecture Hall',
     description:
       'Your growing collection has gained you an invitation to attend a series of lectures for a month. You spend this month immersing yourself in as much literature as possible.',
@@ -539,7 +579,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [INTENSE_RESEARCH_ID]: {
+    sortNum: 10004,
     name: 'Intense Research',
     description:
       'You consult your books and cross-reference them with libraries and other places of scholarship that you have access to. Depending on the topic of research, the outcome will differ.',
@@ -562,7 +603,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [THE_GOD_OF_MAN_ID]: {
+    sortNum: 10005,
     name: 'The God of Man',
     description:
       'Your devotion to the primary deity of the area has gained you an invitation to receive a special anointing by the clergy. You feel a growing connection with god.',
@@ -590,7 +632,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [MEDIUM_CONSULTATION_ID]: {
+    sortNum: 10300,
     name: 'Medium Consultation',
     description:
       'You visit a medium to deal with your grief. They reach out into their glass orb and conjure up a spirit of import to you.',
@@ -609,7 +652,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [SPIRITIST_SOCIETY_ID]: {
+    sortNum: 10301,
     name: 'Spiritist Society',
     description:
       'Your curiosity about the Great Beyond has led you to meet a curious group of like-minded individuals.',
@@ -644,7 +688,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [WARRIORS_GUILD_ID]: {
+    sortNum: 10400,
     name: 'Warrior’s Guild',
     description:
       'You join a local Warrior’s Guild for the month and train alongside them for the month.',
@@ -656,7 +701,7 @@ export const EXPERIENCES: Experience[] = [
       },
       {
         type: REWARD_TYPE.Other,
-        description: 'a Warrior’s Guild is added to the settlement'
+        description: 'a Warrior’s Guild is added to the settlement',
       },
       {
         type: REWARD_TYPE.OR,
@@ -684,7 +729,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [HOSPITALIZED_ID]: {
+    sortNum: 20000,
     name: 'Hospitalized',
     description:
       'After being nearly struck down in battle, your allies were able to bandage your wounds and get you to a local healer. You were in a coma for nearly a month, but you eventually woke up. You suffered a great loss to your body, but your brush with death left you more closely attuned to the other side.',
@@ -702,7 +748,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [ANGELS_TO_SOME_ID]: {
+    sortNum: 30000,
     name: 'Angels to Some',
     description:
       'You are visited by otherworldly beings, heralds of pain and torment. They flay your skin and rend your flesh, taking you to the brink of death before spitting you back out. The experience has taught you the meaning of pain, and has given you the motivation to inflict it back onto others. Add Cult of Pain, and Zealot Infestation to the settlement you are using Reflect & Learn in.',
@@ -733,7 +780,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [HYPERTYPHOON_ID]: {
+    sortNum: 30100,
     name: 'Hypertyphoon',
     description:
       'The astrolabe contains an ancient script which glows in the moonlight. It describes an astral calendar belonging to a long-forgotten people of the sea. You comprehend an incantation, and you read it. Suddenly, a fog rolls out from the sea. The moon glows of its own accord. You cannot tell, but it is almost as if the moon now has a face. It looks like it is screaming. Suddenly, a typhoon of massive proportions floods the settlement. Set the settlement to be Poor, <current size -1>, Shrinking, <current guard - 1>. Remove all other tags.',
@@ -756,7 +804,8 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
 
-  {
+  [BEFORE_THE_ECLIPSE_ID]: {
+    sortNum: 30200,
     name: 'Before the Eclipse',
     description:
       'A grim madness overcomes you as the book tempts your greed. You spend the month locked up in your room, whispering threats of unimaginable acts.',
@@ -779,7 +828,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [THE_CIRCLE_OF_BLOOD_ID]: {
+    sortNum: 30201,
     name: 'The Circle of Blood',
     description:
       'You use your influence to corrupt the settlement, building agents all over. These agents orchestrate an organized spree of murder, drawing out a massive magic circle of blood throughout the settlement. Add Shrinking to the settlement.',
@@ -800,7 +850,8 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-  {
+  [THE_LUNAR_ECLIPSE_ID]: {
+    sortNum: 30202,
     name: 'The Lunar Eclipse',
     description:
       'You summon a portent of a dark god, inviting him and his followers to dine upon the flesh of the living. Those within the settlement find themselves swallowed by the darkness, and are all dead. Lose your Scarred adventurer. Set the settlement to be Poor, Abandoned, Shrinking, None, Hostile. Remove all other tags.',
@@ -832,4 +883,6 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
   },
-];
+};
+
+export const EXPERIENCE_ARR: Experience[] = Object.values(EXPERIENCES).sort((a, b) => a.sortNum - b.sortNum)
